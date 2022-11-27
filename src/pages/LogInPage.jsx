@@ -11,6 +11,7 @@ import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import Slider from '../specs/Slider'
+import CountryDropdown from 'country-dropdown-with-flags-for-react'; 
 import './styles/LogInPage.scss'
 
 function LogInPage() {
@@ -23,6 +24,16 @@ function LogInPage() {
         </div>
         <div className='central-area-div-textbox'>
             <h4 className='central-area-div-textbox-title-loginpage'>EL LOGO FEROZ! NECESITA SABER TU PAÍS Y NÚMERO DE CELULAR. INICIA SESIÓN CON ALGÚN MÉTODO Y ESTARÁS DENTRO :)</h4>
+            <div className="central-area-div-textbox-input-div">
+                <CountryDropdown  id="UNIQUE_ID" className='central-area-div-textbox-input-div-country' preferredCountries={['co', 'us']}  value="" ></CountryDropdown>
+                <input type="text" className="central-area-div-textbox-input-div-input"></input>
+            </div>
+            <div className = "central-area-div-textbox-checkBox-div">
+                <input className = "central-area-div-textbox-checkBox-div-input" type='checkbox'></input> <p className = "central-area-div-textbox-checkBox-div-text">ACEPTO LOS TÉRMINOS Y CONDICIONES DEL SERVICIO Y LA POLÍTICA DE PRIVACIDAD DE EL LOGO FEROZ!</p>
+            </div>
+            <div className='copyright-area-div'>
+                <CopyrightComponent />
+            </div>
         </div>
     </>
 }

@@ -24,16 +24,18 @@ function ThirdPage() {
         </div>
         <div className='central-area-div-textbox'>
             <h4 className='tertiary-title'>¿CÓMO TE GUSTARÍA QUE PERCIBIERAN TU MARCA?</h4>
-            <Slider lowText = 'AMABLE' highText = 'AUTORITARIA'></Slider>
-            <Slider lowText = 'INNOVADORA' highText = 'CLÁSICA'></Slider>
-            <Slider lowText = 'CREATIVA' highText = 'SERIA'></Slider>
-            <Slider lowText = 'MASIVA' highText = 'EXCLUSIVA'></Slider>
-            <Slider lowText = 'CONVENCIONAL' highText = 'REBELDE'></Slider>
-            <Link to='/LogInPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
+                <Slider lowText = 'AMABLE' highText = 'AUTORITARIA'></Slider>
+                <Slider lowText = 'INNOVADORA' highText = 'CLÁSICA'></Slider>
+                <Slider lowText = 'CREATIVA' highText = 'SERIA'></Slider>
+                <Slider lowText = 'MASIVA' highText = 'EXCLUSIVA'></Slider>
+                <Slider lowText = 'CONVENCIONAL' highText = 'REBELDE'></Slider>
+                <Link to='/LogInPage'>
+                    <ChangePageButton text='SIGUIENTE'></ChangePageButton>
+                </Link>
             </div>
             <div className='copyright-area-div'>
                 <CopyrightComponent />
-        </div>
+            </div>
     </>
 }
 

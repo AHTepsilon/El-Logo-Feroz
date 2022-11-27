@@ -1,0 +1,56 @@
+$hotPink: #F32178;
+
+header{
+    .logo-div{
+
+    }
+
+    .user-div{
+
+    }
+}
+
+section{
+    .section-select-div{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        margin-bottom: 3em;
+        &-select{
+            width: 60em;
+            height: 3em;
+            border-radius: 5px;
+        }
+    }
+
+    .section-options-grid{
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &-gridarea{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2em 2em;
+        grid-auto-rows: minmax(50px, auto);
+        }
+
+        &-option{
+            
+        }
+    }
+    
+    .section-button{
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &-butt{
+            width: 30em;
+        }
+    }
+}
