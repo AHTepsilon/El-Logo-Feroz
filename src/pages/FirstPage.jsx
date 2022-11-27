@@ -27,9 +27,6 @@ function FirstPage(){
             <div className='central-area-div-textbox'>
                 <TextBox className='text-box' title='NOMBRE DE TU EMPRENDIMIENTO' placeholder='Mundo Interesante'></TextBox>
                     <Link to='/SecondPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
-                <Routes>
-                    <Route path="/SecondPage" element={<SecondPage />}></Route>
-                </Routes>
             </div>
             <div className='copyright-area-div'>
                 <CopyrightComponent />

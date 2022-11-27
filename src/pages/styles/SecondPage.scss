@@ -1,0 +1,34 @@
+$hotPink: #F32178;
+
+.central-area-div{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+
+    .title{
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-textbox{  
+        margin-top: 3em;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        .text-box{
+            
+        }
+    }
+
+    
+    .copyright-area-div{
+        margin-top: 15em;
+        width: 50%;
+        position: relative;
+        left: 50%;
+}
+}

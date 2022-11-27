@@ -12,18 +12,17 @@ import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import './styles/SecondPage.scss'
 
-function SecondPage() {
+function ThirdPage() {
     return <>
         <div className='logo-div'>
 
         </div>
         <div className='central-area-div'>
             <Titles className='title' text=""></Titles>
-                <PageNumCounter className='page-counter' pageNum='2'></PageNumCounter>
+                <PageNumCounter className='page-counter' pageNum='3'></PageNumCounter>
         </div>
         <div className='central-area-div-textbox'>
-                <TextBox className='text-box' title='¿A QUÉ SECTOR ECONOMICO PERTENECE TU EMPRENDIMIENTO?' placeholder='Perfil Instagram'></TextBox>
-                    <Link to='/ThirdPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
+            <Link to='/ThirdPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
             </div>
             <div className='copyright-area-div'>
                 <CopyrightComponent />
@@ -31,4 +30,4 @@ function SecondPage() {
     </>
 }
 
-export default SecondPage;
+export default ThirdPage;

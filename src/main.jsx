@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ReactDOM from 'react-dom/client'
 import FirstPage from './pages/FirstPage'
 import SecondPage from './pages/SecondPage'
+import ThirdPage from './pages/ThirdPage'
 import './index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<FirstPage />}></Route>
         <Route path="/SecondPage" element={<SecondPage />}></Route>
+        <Route path="/ThirdPage" element={<ThirdPage />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>
