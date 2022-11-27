@@ -1,7 +1,17 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    Outlet
+  } from "react-router-dom";
+import SecondPage from './SecondPage'
 import Titles from '../specs/Titles'
 import PageNumCounter from '../specs/PageNumCounter'
 import TextBox from '../specs/TextBox'
+import ChangePageButton from '../specs/ChangePageButton'
+import CopyrightComponent from '../specs/CopyrightComponent'
 import './styles/FirstPage.scss'
 
 function FirstPage(){
@@ -16,10 +26,14 @@ function FirstPage(){
             </div>
             <div className='central-area-div-textbox'>
                 <TextBox className='text-box' title='NOMBRE DE TU EMPRENDIMIENTO' placeholder='Mundo Interesante'></TextBox>
+                    <Link to='/SecondPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
+                <Routes>
+                    <Route path="/SecondPage" element={<SecondPage />}></Route>
+                </Routes>
             </div>
-        </div>
-        <div className='copyright-area-div'>
-
+            <div className='copyright-area-div'>
+                <CopyrightComponent />
+            </div>
         </div>
         </>
 }

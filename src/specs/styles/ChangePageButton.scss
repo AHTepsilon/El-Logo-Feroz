@@ -1,0 +1,16 @@
+$hotPink: #F32178;
+
+.next-button{
+    margin-top: 2em;
+    background-color: $hotPink;
+    color: #FFFFFF;
+    width: 7.5em;
+    height: 2.2em;
+    border-radius: 5px;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        background-color: darken($hotPink, 10%);
+    }
+}

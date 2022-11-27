@@ -7,26 +7,21 @@
     justify-content: center;
 
     .tertiary-title{
+        position: relative;
         text-align: left;
+        left: 0;
     }
     
     .input-box{
         width: 32em;
         height: 2em;
+        color: $hotPink;
+        font-weight: bold;
 
         &::placeholder {
             color: $hotPink;
             font-weight: bold;
+            opacity: .5;
         }
-    }
-    
-    .next-button{
-        margin-top: 2em;
-        background-color: $hotPink;
-        color: #FFFFFF;
-        width: 7.5em;
-        height: 2.2em;
-        border-radius: 5px;
-        border: none;
     }
 }
