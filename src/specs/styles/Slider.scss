@@ -1,0 +1,26 @@
+.slider-item{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    &-text{
+
+        &-low{
+
+        }
+
+        &-high{
+            
+        }
+    }
+
+    &-range{
+        align-items: center;
+        justify-content: center;
+        width: 20em;
+        margin: 0 2em;
+    }
+}

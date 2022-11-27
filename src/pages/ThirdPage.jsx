@@ -10,7 +10,8 @@ import PageNumCounter from '../specs/PageNumCounter'
 import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
-import './styles/SecondPage.scss'
+import Slider from '../specs/Slider'
+import './styles/ThirdPage.scss'
 
 function ThirdPage() {
     return <>
@@ -22,7 +23,13 @@ function ThirdPage() {
                 <PageNumCounter className='page-counter' pageNum='3'></PageNumCounter>
         </div>
         <div className='central-area-div-textbox'>
-            <Link to='/ThirdPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
+            <h4 className='tertiary-title'>¿CÓMO TE GUSTARÍA QUE PERCIBIERAN TU MARCA?</h4>
+            <Slider lowText = 'AMABLE' highText = 'AUTORITARIA'></Slider>
+            <Slider lowText = 'INNOVADORA' highText = 'CLÁSICA'></Slider>
+            <Slider lowText = 'CREATIVA' highText = 'SERIA'></Slider>
+            <Slider lowText = 'MASIVA' highText = 'EXCLUSIVA'></Slider>
+            <Slider lowText = 'CONVENCIONAL' highText = 'REBELDE'></Slider>
+            <Link to='/LogInPage'><ChangePageButton text='SIGUIENTE'></ChangePageButton></Link>
             </div>
             <div className='copyright-area-div'>
                 <CopyrightComponent />

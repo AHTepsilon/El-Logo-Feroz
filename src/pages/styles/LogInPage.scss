@@ -19,8 +19,10 @@ $hotPink: #F32178;
         justify-content: center;
         display: flex;
         flex-direction: column;
-        .text-box{
-            
+        
+        &-title-loginpage{
+            width: 45%;
+            text-align: center;
         }
     }
 
