@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 $hotPink: #F32178;
 
 .next-button{
@@ -8,6 +9,7 @@ $hotPink: #F32178;
     height: 2.2em;
     border-radius: 5px;
     border: none;
+    font-family: 'Josefin Sans', sans-serif;
 
     &:hover {
         cursor: pointer;

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
 $hotPink: #F32178;
 $gray: #DDDDDD;
+$darkGray: #2B2B2B;
 
 .options-selector-div{
 
@@ -14,12 +17,17 @@ $gray: #DDDDDD;
     display: flex;
     flex-direction: column;
 
+    &:hover{
+        cursor: pointer;
+    }
+
     .options-title{
         align-items: center;
         justify-content: center;
         text-align: center;
-
+        font-family: 'Josefin Sans', sans-serif;
         font-size: 15px;
+        color: $darkGray;
     }
 
     .progress-bar{

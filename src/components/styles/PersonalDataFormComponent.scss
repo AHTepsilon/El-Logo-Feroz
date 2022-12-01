@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
+
+.form{
+    background: $gray;
+    border: 1px solid;
+    border-color: $darkGray;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @mixin checkBoxes(){
+        display: flex;
+        flex-direction: row;
+        height: 2em;
+        width: 75%;
+
+        input{
+            background: $hotPink;
+        }
+        p{
+            color: $darkGray;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+        }
+    }
+
+    @mixin textBoxes() {
+        width: 20em;
+        height: 2em;
+        border: none;
+    }
+
+    &-main-div{
+        display: flex;
+        flex-direction: row;
+
+        .form-firstColumn{
+
+            &-name{
+                input{
+                    @include textBoxes();
+                }
+            }
+            
+            &-email{
+                input{
+                    @include textBoxes();
+                }
+            }
+            
+            &-checkboxes{
+                display: flex;
+                flex-direction: column;
+                margin-top: 2em;
+
+                &-first{
+                    @include checkBoxes();
+                }
+                
+                &-second{
+                    @include checkBoxes();
+                }
+            }
+        }
+
+        .form-secondColumn{
+
+            &-phone{
+                input{
+                    @include textBoxes();
+                }
+            }
+                        
+            &-checkboxes{
+                display: flex;
+                flex-direction: column;
+                margin-top: 7em;
+
+                &-first{
+                    @include checkBoxes();
+                }
+                
+                &-second{
+                    @include checkBoxes();
+                }
+            }
+        }
+    }
+
+    &-lowercheckbox{
+
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        margin: 2em;
+
+        input{
+            width: 30px;
+        }
+        
+        p{
+            color: $darkGray;
+            width: 100%;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+    }
+
+    h4{
+        font-family: 'Josefin Sans', sans-serif;
+        color: $darkGray;
+    }
+}
