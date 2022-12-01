@@ -39,7 +39,9 @@ function DataGatheringPage() {
                 <ChangePageButton className='section-button-butt' text='PONTE MANOS A LA OBRA, LOGO FEROZ!'/>
             </div>
         </section>
-        <PersonalDataFormComponent className='PersonalDataPopUp'></PersonalDataFormComponent>
+        {
+            isDataFormVisible ? <PersonalDataFormComponent className='PersonalDataPopUp'></PersonalDataFormComponent> : <div></div>
+        }
     </>
 }
 

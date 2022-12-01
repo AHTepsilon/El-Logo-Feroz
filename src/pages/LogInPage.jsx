@@ -28,6 +28,14 @@ function LogInPage() {
                 <CountryDropdown  id="UNIQUE_ID" className='central-area-div-textbox-input-div-country' preferredCountries={['co', 'us']}  value="" ></CountryDropdown>
                 <input type="text" className="central-area-div-textbox-input-div-input"></input>
             </div>
+            <div className='central-area-div-textbox-buttons'>
+                <div className='central-area-div-textbox-buttons-google-div'>
+                    <button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button>
+                </div>
+                <div className='central-area-div-textbox-buttons-meta-div'>
+                    <button className='central-area-div-textbox-buttons-meta-div-button'>Continuar con Meta</button>
+                </div>
+            </div>
             <div className = "central-area-div-textbox-checkBox-div">
                 <input className = "central-area-div-textbox-checkBox-div-input" type='checkbox'></input> <p className = "central-area-div-textbox-checkBox-div-text">ACEPTO LOS TÉRMINOS Y CONDICIONES DEL SERVICIO Y LA POLÍTICA DE PRIVACIDAD DE EL LOGO FEROZ!</p>
             </div>
