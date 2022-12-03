@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
+.form-div{
+    margin: 0 3em 2em;
+}
+
+.form{
+    &-sliders{
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    &-type{
+        display: flex;
+        flex-direction: column;
+
+        &-checkboxes{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}

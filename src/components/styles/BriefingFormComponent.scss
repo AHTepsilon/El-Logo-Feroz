@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
+.text-input-a{
+    width: 25em;
+    height: 2em;
+    border: none;
+}
+
+.text-input-b{
+    width: 58em;
+    height: 2em;
+    border: none;
+}
+
+.form{
+    .form-first-div{
+        display: flex;
+        flex-direction: row;
+
+        &-logo-text{
+            display: flex;
+            flex-direction: column;
+
+            &-checkbox{
+                display: flex;
+                flex-direction: row;
+                height: 2em;
+                width: 75%;
+        
+                input{
+                    background: $hotPink;
+                }
+                p{
+                    color: $darkGray;
+                    font-family: 'Josefin Sans', sans-serif;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
