@@ -29,7 +29,7 @@ function ThirdPage() {
                 <Slider lowText = 'CREATIVA' highText = 'SERIA'></Slider>
                 <Slider lowText = 'MASIVA' highText = 'EXCLUSIVA'></Slider>
                 <Slider lowText = 'CONVENCIONAL' highText = 'REBELDE'></Slider>
-                <Link to='/LogInPage'>
+                <Link to='/DataGatheringPage'>
                     <ChangePageButton text='SIGUIENTE'></ChangePageButton>
                 </Link>
             </div>

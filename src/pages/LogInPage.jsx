@@ -30,10 +30,10 @@ function LogInPage() {
             </div>
             <div className='central-area-div-textbox-buttons'>
                 <div className='central-area-div-textbox-buttons-google-div'>
-                    <button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button>
+                    <Link to='/FirstPage'><button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button></Link>
                 </div>
                 <div className='central-area-div-textbox-buttons-meta-div'>
-                    <button className='central-area-div-textbox-buttons-meta-div-button'>Continuar con Meta</button>
+                    <Link to='/FirstPage'><button className='central-area-div-textbox-buttons-meta-div-button'>Continuar con Meta</button></Link>
                 </div>
             </div>
             <div className = "central-area-div-textbox-checkBox-div">
