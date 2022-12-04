@@ -13,7 +13,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
       <Route path="/" element={<LogInPage />}></Route>
-        <Route path="/FirstPage" element={<FirstPage />}></Route>
         <Route path="/SecondPage" element={<SecondPage />}></Route>
         <Route path="/ThirdPage" element={<ThirdPage />}></Route>
         <Route path="/DataGatheringPage" element={<DataGatheringPage />}></Route>
