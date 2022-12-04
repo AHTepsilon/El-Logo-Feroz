@@ -26,7 +26,7 @@ function LogInPage() {
             <h4 className='central-area-div-textbox-title-loginpage'>EL LOGO FEROZ! NECESITA SABER TU PAÍS Y NÚMERO DE CELULAR. INICIA SESIÓN CON ALGÚN MÉTODO Y ESTARÁS DENTRO :)</h4>
             <div className="central-area-div-textbox-input-div">
                 <CountryDropdown  id="UNIQUE_ID" className='central-area-div-textbox-input-div-country' preferredCountries={['co', 'us']}  value="" ></CountryDropdown>
-                <input type="text" className="central-area-div-textbox-input-div-input"></input>
+                <input type="text" placeholder="Número Telefónico" className="central-area-div-textbox-input-div-input"></input>
             </div>
             <div className='central-area-div-textbox-buttons'>
                 <div className='central-area-div-textbox-buttons-google-div'>

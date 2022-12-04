@@ -27,7 +27,7 @@ function ToggleOthers(exclude) {
 }
 
 function DataGatheringPage() {
-  const [isDataFormVisible, setIsDataFormVisible] = useState(false);
+  const [isDataFormVisible, setIsDataFormVisible] = useState(true);
   const [isBriefingFormVisible, setIsBriefingFormVisible] = useState(false);
   const [isStyleFormVisible, setIsStyleFormVisible] = useState(false);
   const [isExamplesFormVisible, setIsExamplesFormVisible] = useState(false);
@@ -141,27 +141,27 @@ function DataGatheringPage() {
         </div>
       </section>
       {isDataFormVisible ? (
-        <PersonalDataFormComponent className="PersonalDataPopUp"></PersonalDataFormComponent>
+        <div className="PersonalDataPopUp"><PersonalDataFormComponent></PersonalDataFormComponent></div>
       ) : (
         <div></div>
       )}
       {isBriefingFormVisible ? (
-        <BriefingFormComponent className="BriefingPopUp"></BriefingFormComponent>
+        <div className="BriefingPopUp"><BriefingFormComponent></BriefingFormComponent></div>
       ) : (
         <div></div>
       )}
       {isStyleFormVisible ? (
-        <StyleFormComponent className="StylePopUp"></StyleFormComponent>
+        <div className="StylePopUp"><StyleFormComponent></StyleFormComponent></div>
       ) : (
         <div></div>
       )}
       {isExamplesFormVisible ? (
-        <ExamplesFormComponent className="StylePopUp"></ExamplesFormComponent>
+        <div className="ExamplesPopUp"><ExamplesFormComponent></ExamplesFormComponent></div>
       ) : (
         <div></div>
       )}
       {isPlanFormVisible ? (
-        <PlanFormComponent className="PlanPopUp"></PlanFormComponent>
+        <div className="PlanPopUp"><PlanFormComponent></PlanFormComponent></div>
       ) : (
         <div></div>
       )}
