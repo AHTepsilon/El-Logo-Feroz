@@ -12,6 +12,7 @@ import PersonalDataFormComponent from "../components/PersonalDataFormComponent";
 import BriefingFormComponent from "../components/BriefingFormComponent";
 import StyleFormComponent from "../components/StyleFormComponent";
 import ExamplesFormComponent from "../components/ExamplesFormComponent";
+import PlanFormComponent from '../components/PlanFormComponent'
 import "./styles/DataGatheringPage.scss";
 
 function ToggleOthers(exclude) {
@@ -29,7 +30,8 @@ function DataGatheringPage() {
   const [isDataFormVisible, setIsDataFormVisible] = useState(false);
   const [isBriefingFormVisible, setIsBriefingFormVisible] = useState(false);
   const [isStyleFormVisible, setIsStyleFormVisible] = useState(false);
-  const [isExamplesFormVisible, setIsExamplesFormVisible] = useState(true);
+  const [isExamplesFormVisible, setIsExamplesFormVisible] = useState(false);
+  const [isPlanFormVisible, setIsPlanFormVisible] = useState(false);
 
   return (
     <>
@@ -49,6 +51,7 @@ function DataGatheringPage() {
                 setIsBriefingFormVisible(false);
                 setIsStyleFormVisible(false);
                 setIsExamplesFormVisible(false);
+                setIsPlanFormVisible(false);
               }}
             >
               <OptionsSelector1
@@ -64,6 +67,7 @@ function DataGatheringPage() {
                 setIsDataFormVisible(false);
                 setIsStyleFormVisible(false);
                 setIsExamplesFormVisible(false);
+                setIsPlanFormVisible(false);
               }}
             >
               <OptionsSelector2
@@ -79,6 +83,7 @@ function DataGatheringPage() {
                 setIsDataFormVisible(false);
                 setIsStyleFormVisible(!isStyleFormVisible);
                 setIsExamplesFormVisible(false);
+                setIsPlanFormVisible(false);
               }}
             >
               <OptionsSelector3
@@ -94,6 +99,7 @@ function DataGatheringPage() {
                 setIsDataFormVisible(false);
                 setIsStyleFormVisible(false);
                 setIsExamplesFormVisible(!isExamplesFormVisible);
+                setIsPlanFormVisible(false);
               }}
               >
             <OptionsSelector4
@@ -103,12 +109,22 @@ function DataGatheringPage() {
               text="EJEMPLOS"
             />
             </div>
+            <div
+              onClick={() => {
+                setIsBriefingFormVisible(false);
+                setIsDataFormVisible(false);
+                setIsStyleFormVisible(false);
+                setIsExamplesFormVisible(false);
+                setIsPlanFormVisible(!isPlanFormVisible);
+              }}
+              >
             <OptionsSelector5
               className="section-options-grid-option"
               lowValue5="2"
               highValue5="0"
               text="PLAN"
             />
+            </div>
             <OptionsSelector6
               className="section-options-grid-option"
               lowValue6="1"
@@ -141,6 +157,11 @@ function DataGatheringPage() {
       )}
       {isExamplesFormVisible ? (
         <ExamplesFormComponent className="StylePopUp"></ExamplesFormComponent>
+      ) : (
+        <div></div>
+      )}
+      {isPlanFormVisible ? (
+        <PlanFormComponent className="PlanPopUp"></PlanFormComponent>
       ) : (
         <div></div>
       )}

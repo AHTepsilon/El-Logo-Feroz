@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
+
+.form{
+    &-title{
+        h4{
+            text-align: center;
+            color: $darkGray;
+        }
+        p{
+            text-align: center;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 12px;
+            color: $darkGray;
+        }
+    }
+
+    &-chooselogo{
+        display: flex;
+        flex-direction: row;
+
+        p{
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            color: $darkGray;
+        }
+
+        textarea{
+            width: 250px;
+            height: 100px;
+        }
+    }
+}
