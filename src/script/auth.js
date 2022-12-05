@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import {app, auth, db} from '../firebase/firebase'
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 
 const GoogleProvider = new GoogleAuthProvider();
 
@@ -47,12 +47,25 @@ export function logOut(){
       });
 }
 
+export async function userExists(){
+  let docRef = doc(db, "users", userData.id);
+
+  docRef.get().then((doc) => {
+    if(doc.exists){
+      return(true);
+    }
+    else{
+      return(false);
+    }
+  })
+}
+
 export async function validateUser(){
     await onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
           userId = uid
-          console.log(uid)
+          console.log(userId);
           // ...
         } else {
           // User is signed out
@@ -62,20 +75,22 @@ export async function validateUser(){
 }
 
 export async function sendUserToDatabase(userData) {
+  if(!userExists){
     try{
-        await setDoc(doc(db, "users", userData.id), userData);
-        alert("User created");
-      }
+      await setDoc(doc(db, "users", userData.id), userData);
+      alert("User created");
+    }
 
-      catch(error){
-        console.log(error);
-      }
+    catch(error){
+      console.log(error);
+    }
+  }
 }
 
 export async function updateUserData(userData) {
     try{
-        await setDoc(doc(db, "users", userData), userData);
-        alert("User created");
+        validateUser()
+        await updateDoc(doc(db, "users", auth.currentUser.uid), userData);
       }
 
       catch(error){

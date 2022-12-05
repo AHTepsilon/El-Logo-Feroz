@@ -14,7 +14,7 @@ import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import Slider from '../specs/Slider'
 import CountryDropdown from 'country-dropdown-with-flags-for-react'; 
-import {logIn, logOut, validateUser, sendUserToDatabase} from '../script/auth'
+import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData} from '../script/auth'
 import './styles/LogInPage.scss'
 
 export default class LogInPage extends Component{
@@ -40,7 +40,8 @@ export default class LogInPage extends Component{
             const user = {
                 'telefono': phoneNum
             }
-            validateUser()
+            validateUser();
+            updateUserData(user)
         }
         else{
             alert('Por favor digita un número telefónico y acepta los términos y condiciones y la política de privacidad')
