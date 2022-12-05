@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import {app, auth, db} from '../firebase/firebase'
-import { doc, setDoc, updateDoc } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 
 const GoogleProvider = new GoogleAuthProvider();
 

@@ -31,8 +31,9 @@ export default class FirstPage extends Component {
         }
 
         if (this.state.businessName != ''){
-            updateUserData(user)
-            window.location.href = '/SecondPage'
+            updateUserData(user).then(() => {
+                window.location.href = '/SecondPage'
+            })
         }
         else{
             alert('Por favor llena todos los campos antes de continuar')
