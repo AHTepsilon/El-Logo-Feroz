@@ -6,6 +6,7 @@ import {
     Route,
     Link,
     Navigate ,
+    useNavigate
   } from "react-router-dom";
 import Titles from '../specs/Titles'
 import PageNumCounter from '../specs/PageNumCounter'
@@ -14,7 +15,7 @@ import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import Slider from '../specs/Slider'
 import CountryDropdown from 'country-dropdown-with-flags-for-react'; 
-import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData} from '../script/auth'
+import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import './styles/LogInPage.scss'
 
 export default class LogInPage extends Component{
@@ -23,7 +24,8 @@ export default class LogInPage extends Component{
         this.state = {
             phoneNum: '',
             didAccept: false,
-            hasLoggedIn: false
+            hasLoggedIn: false,
+            userExists: false
         };
 
     }
@@ -42,6 +44,7 @@ export default class LogInPage extends Component{
             }
             validateUser();
             updateUserData(user)
+            this.setState({userExists: true});
         }
         else{
             alert('Por favor digita un número telefónico y acepta los términos y condiciones y la política de privacidad')
@@ -67,6 +70,7 @@ export default class LogInPage extends Component{
                     <div className='central-area-div-textbox-buttons-google-div'>
                         <button onClick={() => {this.loginValidation('google', this.state.phoneNum, this.state.didAccept)}} className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button>
                         {/*<Link to='/FirstPage'><button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button></Link>*/}
+                        {this.state.userExists ? <Navigate to='FirstPage' replace={true}/> : <></>}                  
                     </div>
                     <div className='central-area-div-textbox-buttons-meta-div'>
                         <Link to='/FirstPage'><button className='central-area-div-textbox-buttons-meta-div-button'>Continuar con Meta</button></Link>
