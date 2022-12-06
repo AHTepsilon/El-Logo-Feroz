@@ -1,8 +1,8 @@
 import React, {Component, useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import {app, auth, db} from '../firebase/firebase'
+import {app, auth, db, storage} from '../firebase/firebase'
 import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
-
+import {ref, uploadBytes} from 'firebase/storage'
 const GoogleProvider = new GoogleAuthProvider();
 
 let userId = '';
@@ -96,4 +96,21 @@ export async function updateUserData(userData) {
       catch(error){
         console.log(error);
       }
+}
+
+export async function getData(data){
+  const docRef = doc(collection(db, 'users', auth.currentUser.uid, data));
+  const docSnap = await getDoc(docRef);
+
+  if(docSnap.exists()){
+    console.log("Document data:", docSnap.data());
+  }
+}
+
+export async function uploadImage(toRef) {
+  const storageRef = ref(storage, toRef);
+
+  uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('File uploaded');
+  })
 }

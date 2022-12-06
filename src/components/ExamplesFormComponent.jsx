@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './styles/ExamplesFormComponent.scss'
 
-function ExamplesFormComponent(){
-    return <form className='form'>
+export default class ExamplesFormComponent extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    render(){
+        return <form className='form'>
         <div className = 'form-title'>
             <h4 className='form-title-main'>LE AYUDARÍAS MUCHO A EL LOGO FEROZ! SI SUBES 3 LOGOS QUE TE GUSTEN MUCHO</h4>
             <p className='form-title-secondary'>NO ES NECESARIO QUE SEAN DEL MISMO SECTOR ECONÓMICO, SON SÓLO REFERENCIAS PARA SABER QUÉ CAMINO TOMAR</p>
@@ -28,6 +36,5 @@ function ExamplesFormComponent(){
             </div>
         </div>
     </form>
+    }
 }
-
-export default ExamplesFormComponent;

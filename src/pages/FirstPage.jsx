@@ -14,7 +14,7 @@ import PageNumCounter from '../specs/PageNumCounter'
 import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
-import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
+import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists, getData} from '../script/auth'
 import './styles/FirstPage.scss'
 
 export default class FirstPage extends Component {
@@ -23,6 +23,12 @@ export default class FirstPage extends Component {
         this.state = {
             businessName: '',
         }
+    }
+
+    async componentDidMount(){
+        validateUser().then(() => {
+            this.setState({businessName:getData('nombreEmprendimiento')})
+        })
     }
 
     updateAnswers(businessName){
