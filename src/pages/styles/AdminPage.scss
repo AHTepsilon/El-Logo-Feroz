@@ -28,6 +28,10 @@ $darkGray: #2B2B2B;
         justify-content: left;
         display: flex;
         flex-direction: column;
+
+            &-a{
+                text-decoration: none;
+            }
         
             &-item{
                 border: 3px solid;

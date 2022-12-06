@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import {app, auth, db, storage} from '../firebase/firebase'
-import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc, collection, getDoc, getDocs } from "firebase/firestore"; 
 import {ref, uploadBytes} from 'firebase/storage'
 const GoogleProvider = new GoogleAuthProvider();
 
@@ -101,4 +101,18 @@ export async function uploadImage(toRef, file) {
   uploadBytes(storageRef, file).then((snapshot) => {
     console.log('File uploaded');
   })
+}
+
+export async function getRequestsById(id){
+  let requests = [];
+  
+  const querySnapshot = await getDocs(collection(db, 'requests'));
+  querySnapshot.forEach((doc) => {
+    requests.push(doc.data());
+  });
+
+  console.log(requests);
+
+  /*let filteredRequests = requests.filter((item) => id === item.id)
+  return filteredRequests ? filteredRequests[0] : null*/
 }

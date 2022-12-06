@@ -13,6 +13,9 @@ import BriefingFormComponent from "../components/BriefingFormComponent";
 import StyleFormComponent from "../components/StyleFormComponent";
 import ExamplesFormComponent from "../components/ExamplesFormComponent";
 import PlanFormComponent from '../components/PlanFormComponent'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore";
+import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import "./styles/DataGatheringPage.scss";
 
 function ToggleOthers(exclude) {
@@ -24,6 +27,32 @@ function ToggleOthers(exclude) {
       setIsBriefingFormVisible(!isBriefingFormVisible);
       setIsDataFormVisible(false);
   }
+}
+
+function sendData(){
+
+  let dataToSend = {
+
+  };
+
+  validateUser();
+    setTimeout(() => {
+      try{
+        getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+          dataToSend = docSnap.data();
+          console.log(dataToSend)
+          setDoc(doc(db, "requests", auth.currentUser.uid), dataToSend);
+          let newDataToSend = {
+            'estado': 'Pendiente'
+          }
+          updateDoc(doc(db, "requests", auth.currentUser.uid), newDataToSend);
+          alert('Solicitud enviada, espera a que El Logo Feroz! haga su magia!')
+        });
+      }
+      catch(error){
+        console.log(error);
+      }
+    }, 1000)
 }
 
 function DataGatheringPage() {
@@ -137,6 +166,7 @@ function DataGatheringPage() {
           <ChangePageButton
             className="section-button-butt"
             text="PONTE MANOS A LA OBRA, LOGO FEROZ!"
+            clickEvent={sendData}
           />
         </div>
       </section>
