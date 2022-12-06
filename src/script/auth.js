@@ -8,7 +8,18 @@ const GoogleProvider = new GoogleAuthProvider();
 let userId = '';
 let userData = '';
 
-export function logIn(provider){
+export async function sendUserToDatabase(userData) {
+  try{
+    await setDoc(doc(db, "users", auth.currentUser.uid), userData);
+    alert("User created");
+  }
+
+  catch(error){
+    console.log(error);
+  }
+}
+
+export async function logIn(provider){
     if(provider == 'google'){
         signInWithPopup(auth, GoogleProvider)
         .then((result) => {
@@ -48,7 +59,7 @@ export function logOut(){
 }
 
 export async function userExists(){
-  let docRef = doc(db, "users", userData.id);
+  let docRef = doc(db, "users", auth.currentUser.uid);
 
   docRef.get().then((doc) => {
     if(doc.exists){
@@ -66,25 +77,11 @@ export async function validateUser(){
           const uid = user.uid;
           userId = uid
           console.log(userId);
-          // ...
         } else {
           // User is signed out
           // ...
         }
       });
-}
-
-export async function sendUserToDatabase(userData) {
-  if(!userExists){
-    try{
-      await setDoc(doc(db, "users", userData.id), userData);
-      alert("User created");
-    }
-
-    catch(error){
-      console.log(error);
-    }
-  }
 }
 
 export async function updateUserData(userData) {
@@ -98,16 +95,7 @@ export async function updateUserData(userData) {
       }
 }
 
-export async function getData(data){
-  const docRef = doc(collection(db, 'users', auth.currentUser.uid, data));
-  const docSnap = await getDoc(docRef);
-
-  if(docSnap.exists()){
-    console.log("Document data:", docSnap.data());
-  }
-}
-
-export async function uploadImage(toRef) {
+export async function uploadImage(toRef, file) {
   const storageRef = ref(storage, toRef);
 
   uploadBytes(storageRef, file).then((snapshot) => {

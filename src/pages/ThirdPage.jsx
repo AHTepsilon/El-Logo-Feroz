@@ -11,6 +11,8 @@ import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import Slider from '../specs/Slider'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import './styles/ThirdPage.scss'
 
@@ -26,13 +28,36 @@ export default class ThirdPage extends Component {
         }
     }
 
+        async componentDidMount(){
+        validateUser();
+        const myTimeout = setTimeout(() => {
+            try{
+                getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+                    if(docSnap.exists()){
+                        this.setState({slide1: docSnap.data().percep1_amable_autoritaria})
+                        this.setState({slide2: docSnap.data().percep1_amable_autoritaria})
+                        this.setState({slide3: docSnap.data().percep1_amable_autoritaria})
+                        this.setState({slide4: docSnap.data().percep1_amable_autoritaria})
+                        this.setState({slide5: docSnap.data().percep1_amable_autoritaria})
+                    }
+                    else{
+                        this.setState({slide1: 50, slide2: 50, slide3: 50, slide4: 50, slide5: 50,})
+                    }
+                })
+              }
+              catch(error){
+                console.log(error)
+              }
+        }, 1000);
+    }
+
     updateAnswers(slide1, slide2, slide3, slide4, slide5){
         const user = {
-            'percep1: amable-autoritaria': slide1,
-            'percep2: innovadora-clasica': slide2,
-            'percep3: creativa-seria': slide3,
-            'percep4: masiva-exclusiva': slide4,
-            'percep5: convencional-rebelde': slide5,}
+            'percep1_amable_autoritaria': slide1,
+            'percep2_innovadora_clasica': slide2,
+            'percep3_creativa_seria': slide3,
+            'percep4_masiva_exclusiva': slide4,
+            'percep5:_convencional_rebelde': slide5,}
 
         if (this.state.economicSector != ''){
             updateUserData(user).then(() => {

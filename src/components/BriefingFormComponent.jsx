@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './styles/BriefingFormComponent.scss'
 import ChangePageButton from '../specs/ChangePageButton'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 
 export default class PersonalDataFormComponent extends Component {
@@ -21,19 +23,48 @@ export default class PersonalDataFormComponent extends Component {
         }
     }
 
+    async componentDidMount(){
+        validateUser();
+        const myTimeout = setTimeout(() => {
+            try{
+                getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+                    if(docSnap.exists()){
+                        docSnap.data().brief_textoLogo != null ? this.setState({textoLogo: docSnap.data().brief_textoLogo}) : this.setState({textoLogo: ''})
+                        docSnap.data().brief_sloganLogo != null ? this.setState({sloganLogo: docSnap.data().brief_sloganLogo}) : this.setState({sloganLogo: ''})
+                        docSnap.data().sectorEconomico != null ? this.setState({sectorEconomico: docSnap.data().sectorEconomico}) : this.setState({sectorEconomico: ''})
+                        docSnap.data().brief_companiaAccion != null ? this.setState({companiaAccion: docSnap.data().brief_companiaAccion}) : this.setState({companiaAccion: ''})
+                        docSnap.data().brief_principalesProductosServicios != null ? this.setState({principalesProductosServicios: docSnap.data().brief_principalesProductosServicios}) : this.setState({principalesProductosServicios: ''}) 
+                        docSnap.data().brief_publicoObjetivo != null ? this.setState({publicoObjetivo: docSnap.data().brief_publicoObjetivo}) : this.setState({publicoObjetivo: ''})
+                        docSnap.data().brief_coloresRepresentativos != null ? this.setState({coloresRepresentativos: docSnap.data().brief_coloresRepresentativos}) : this.setState({coloresRepresentativos: ''})
+                        docSnap.data().brief_cosasRepresentativas != null ? this.setState({cosasRepresentativas: docSnap.data().brief_cosasRepresentativas}) : this.setState({cosasRepresentativas: ''})
+                        docSnap.data().brief_empresasCompetencia != null ? this.setState({empresasCompetencia: docSnap.data().brief_empresasCompetencia}) : this.setState({empresasCompetencia: ''})
+                        docSnap.data().brief_masQueContar != null ? this.setState({masQueContar: docSnap.data().brief_masQueContar}) : this.setState({masQueContar: ''})
+                        docSnap.data().brief_bool_textoMayusMinusExactas != null ? this.setState({textoMayusMinusExactas: docSnap.data().brief_bool_textoMayusMinusExactas}) : this.setState({textoMayusMinusExactas: ''})  
+                    }
+                    else{
+
+                    }
+                })
+              }
+              catch(error){
+                console.log(error)
+              }
+        }, 1000);
+    }
+
     updateAnswers(){
         const user = {
-            'brief: textoLogo': this.state.textoLogo,
-            'brief: bool: textoMayusMinusExactas': this.state.textoMayusMinusExactas,
-            'brief: sloganLogo': this.state.sloganLogo,
+            'brief_textoLogo': this.state.textoLogo,
+            'brief_bool_textoMayusMinusExactas': this.state.textoMayusMinusExactas,
+            'brief_sloganLogo': this.state.sloganLogo,
             'sectorEconomico': this.state.sectorEconomico,
-            'brief: companiaAccion': this.state.companiaAccion,
-            'brief: principalesProductosServicios': this.state.principalesProductosServicios,
-            'brief: publicoObjetivo': this.state.publicoObjetivo,
-            'brief: coloresRepresentativos': this.state.coloresRepresentativos,
-            'brief: cosasRepresentativas' : this.state.cosasRepresentativas,
-            'brief: empresasCompetencia': this.state.empresasCompetencia,
-            'brief: masQueContar': this.state.masQueContar
+            'brief_companiaAccion': this.state.companiaAccion,
+            'brief_principalesProductosServicios': this.state.principalesProductosServicios,
+            'brief_publicoObjetivo': this.state.publicoObjetivo,
+            'brief_coloresRepresentativos': this.state.coloresRepresentativos,
+            'brief_cosasRepresentativas' : this.state.cosasRepresentativas,
+            'brief_empresasCompetencia': this.state.empresasCompetencia,
+            'brief_masQueContar': this.state.masQueContar
         }
         
         updateUserData(user).then(() => {
@@ -48,7 +79,7 @@ export default class PersonalDataFormComponent extends Component {
                 <h4 className='form-first-div-logo-text-title titles-question'>TEXTO PARA EL LOGO</h4>
                 <input value={this.state.textoLogo} onChange={(e) => {this.setState({textoLogo: e.target.value})}} type='text' className='form-first-div-logo-text-text text-input-a'></input>
                 <div className='form-first-div-logo-text-checkbox'>
-                    <input onClick = {(e) => {this.setState({textoMayusMinusExactas: e.target.checked})}} type='checkbox' className='form-first-div-logo-text-checkbox-check'></input>
+                    <input checked={this.state.textoMayusMinusExactas} onClick = {(e) => {this.setState({textoMayusMinusExactas: e.target.checked})}} type='checkbox' className='form-first-div-logo-text-checkbox-check'></input>
                     <p className='form-first-div-logo-text-checkbox-p'>QUIERO LAS MAYÚSCULAS Y LAS MINÚSCULAS EXACTAMENTE COMO LAS ESCRIBÍ</p>
                 </div>
             </div>

@@ -15,6 +15,7 @@ import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
 import Slider from '../specs/Slider'
 import CountryDropdown from 'country-dropdown-with-flags-for-react'; 
+import {app, auth, db, storage} from '../firebase/firebase'
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import './styles/LogInPage.scss'
 
@@ -37,14 +38,17 @@ export default class LogInPage extends Component{
     }
     
     loginValidation = (provider, phoneNum, didAccept, props) =>{
-        if(phoneNum != '' && didAccept){
+        if(didAccept){
             logIn(provider);
             const user = {
                 'telefono': phoneNum
             }
-            validateUser();
-            updateUserData(user)
+            validateUser()
             this.setState({userExists: true});
+
+            setTimeout(() =>{
+                window.location.href = '/FirstPage'
+            }, 5000)
         }
         else{
             alert('Por favor digita un número telefónico y acepta los términos y condiciones y la política de privacidad')
@@ -64,13 +68,12 @@ export default class LogInPage extends Component{
                 <h4 className='central-area-div-textbox-title-loginpage'>EL LOGO FEROZ! NECESITA SABER TU PAÍS Y NÚMERO DE CELULAR. INICIA SESIÓN CON ALGÚN MÉTODO Y ESTARÁS DENTRO :)</h4>
                 <div className="central-area-div-textbox-input-div">
                     <CountryDropdown  id="UNIQUE_ID" className='central-area-div-textbox-input-div-country' preferredCountries={['co', 'us']}  value="" ></CountryDropdown>
-                    <input value={this.state.phoneNum} onChange={(e) => {this.setState({phoneNum: e.target.value})}} type="text" placeholder="Número Telefónico" className="central-area-div-textbox-input-div-input" required></input>
+                    {/*<input value={this.state.phoneNum} onChange={(e) => {this.setState({phoneNum: e.target.value})}} type="text" placeholder="Número Telefónico" className="central-area-div-textbox-input-div-input" required></input>*/}
                 </div>
                 <div className='central-area-div-textbox-buttons'>
                     <div className='central-area-div-textbox-buttons-google-div'>
                         <button onClick={() => {this.loginValidation('google', this.state.phoneNum, this.state.didAccept)}} className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button>
-                        {/*<Link to='/FirstPage'><button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button></Link>*/}
-                        {this.state.userExists ? <Navigate to='FirstPage' replace={true}/> : <></>}                  
+                        {/*<Link to='/FirstPage'><button className='central-area-div-textbox-buttons-google-div-button'>Continuar con Google</button></Link>*/}                
                     </div>
                     <div className='central-area-div-textbox-buttons-meta-div'>
                         <Link to='/FirstPage'><button className='central-area-div-textbox-buttons-meta-div-button'>Continuar con Meta</button></Link>

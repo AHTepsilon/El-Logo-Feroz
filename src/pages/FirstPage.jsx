@@ -14,7 +14,9 @@ import PageNumCounter from '../specs/PageNumCounter'
 import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
-import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists, getData} from '../script/auth'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
+import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import './styles/FirstPage.scss'
 
 export default class FirstPage extends Component {
@@ -26,9 +28,22 @@ export default class FirstPage extends Component {
     }
 
     async componentDidMount(){
-        validateUser().then(() => {
-            this.setState({businessName:getData('nombreEmprendimiento')})
-        })
+        validateUser();
+        const myTimeout = setTimeout(() => {
+            try{
+                getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+                    if(docSnap.exists()){
+                        this.setState({businessName: docSnap.data().nombreEmprendimiento})
+                    }
+                    else{
+                        this.setState({businessName: ''})
+                    }
+                })
+              }
+              catch(error){
+                console.log(error)
+              }
+        }, 1000);
     }
 
     updateAnswers(businessName){

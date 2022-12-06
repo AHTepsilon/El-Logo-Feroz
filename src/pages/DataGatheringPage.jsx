@@ -27,7 +27,7 @@ function ToggleOthers(exclude) {
 }
 
 function DataGatheringPage() {
-  const [isDataFormVisible, setIsDataFormVisible] = useState(true);
+  const [isDataFormVisible, setIsDataFormVisible] = useState(false);
   const [isBriefingFormVisible, setIsBriefingFormVisible] = useState(false);
   const [isStyleFormVisible, setIsStyleFormVisible] = useState(false);
   const [isExamplesFormVisible, setIsExamplesFormVisible] = useState(false);

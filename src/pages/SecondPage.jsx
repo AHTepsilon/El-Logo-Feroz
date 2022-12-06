@@ -10,6 +10,8 @@ import PageNumCounter from '../specs/PageNumCounter'
 import TextBox from '../specs/TextBox'
 import ChangePageButton from '../specs/ChangePageButton'
 import CopyrightComponent from '../specs/CopyrightComponent'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import './styles/SecondPage.scss'
 
@@ -19,6 +21,25 @@ export default class SecondPage extends Component {
         this.state = {
             economicSector: '',
         }
+    }
+
+    async componentDidMount(){
+        validateUser();
+        const myTimeout = setTimeout(() => {
+            try{
+                getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+                    if(docSnap.exists()){
+                        this.setState({economicSector: docSnap.data().sectorEconomico})
+                    }
+                    else{
+                        this.setState({economicSector: ''})
+                    }
+                })
+              }
+              catch(error){
+                console.log(error)
+              }
+        }, 1000);
     }
 
     updateAnswers(economicSector){

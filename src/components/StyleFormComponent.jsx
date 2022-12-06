@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import './styles/StyleFormComponent.scss'
 import Slider from '../specs/Slider'
 import ChangePageButton from '../specs/ChangePageButton'
+import {app, auth, db, storage} from '../firebase/firebase'
+import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 
 export default class StyleFormComponent extends Component {
@@ -25,13 +27,58 @@ export default class StyleFormComponent extends Component {
         }
     }
 
+    async componentDidMount(){
+        validateUser();
+        const myTimeout = setTimeout(() => {
+            try{
+                getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap =>{
+                    if(docSnap.exists()){
+                        if(docSnap.data().brief_textoLogo != null){
+                            if(docSnap.data().logoType === 'soloTipo'){
+                                console.log(this.state.check1)
+                                this.setState({check1: true})
+                                this.setState({check2: ''})
+                                this.setState({check3: ''})
+                            }
+                            else if(docSnap.data().logoType === 'tipoYSimbolo'){
+                                this.setState({check2: true})
+                                this.setState({check1: ''})
+                                this.setState({check3: ''})
+                            }
+                            else if(docSnap.data().logoType === 'soloSimbolo'){
+                                this.setState({check3: true})
+                                this.setState({check1: ''})
+                                this.setState({check2: ''})
+                            }
+                        }
+
+                        if(docSnap.data().typePreference == 'sansSerif'){
+                            this.setState({check4: true})
+                        }
+                        else if(docSnap.data().typePreference == 'Serif'){
+                            this.setState({check5: true})
+                        }
+                        else if(docSnap.data().typePreference == 'Manuscrita'){
+                            this.setState({check6: true})
+                        }
+                    }
+                    else{
+
+                    }
+                })
+              }
+              catch(error){
+                console.log(error)
+              }
+        }, 1000);
+    }
     updateAnswers(){
         const user = {
-            'percep1: amable-autoritaria': this.state.slide1,
-            'percep2: innovadora-clasica': this.state.slide2,
-            'percep3: creativa-seria': this.state.slide3,
-            'percep4: masiva-exclusiva': this.state.slide4,
-            'percep5: convencional-rebelde': this.state.slide5,
+            'percep1_amable_autoritaria': this.state.slide1,
+            'percep2_innovadora_clasica': this.state.slide2,
+            'percep3_creativa_seria': this.state.slide3,
+            'percep4_masiva_exclusiva': this.state.slide4,
+            'percep5_convencional_rebelde': this.state.slide5,
             'logoType': this.state.logoType,
             'typePreference': this.state.typePreference
         }
@@ -54,15 +101,15 @@ export default class StyleFormComponent extends Component {
             <div className='form-type-checkboxes'>
                 <div className='form-type-checkboxes-typography form-div'>
                     <h4 className='form-type-checkboxes-typography-title'>SOLO TIPOGRAFÍA</h4>
-                    <input value={this.state.check1} onClick = {(e) => {this.setState({logoType: 'soloTipo'})}} type='checkbox' id="checkb-t1" className='form-type-checkboxes-typography-check'></input>
+                    <input defaultChecked={this.state.check1} onClick = {(e) => {this.setState({logoType: 'soloTipo'})}} type='checkbox' id="checkb-t1" className='form-type-checkboxes-typography-check'></input>
                 </div>
                 <div className='form-type-checkboxes-symbol-with form-div'>
                     <h4 className='form-type-checkboxes-symbol-with-title'>CON SÍMBOLO</h4>
-                    <input value={this.state.check2} onClick = {(e) => {this.setState({logoType: 'tipoYSimbolo'})}} type='checkbox' id="checkb-t2" className='form-type-checkboxes-symbol-with-check'></input>
+                    <input defaultChecked={this.state.check2} onClick = {(e) => {this.setState({logoType: 'tipoYSimbolo'})}} type='checkbox' id="checkb-t2" className='form-type-checkboxes-symbol-with-check'></input>
                 </div>
                 <div className='form-type-checkboxes-symbol-alone form-div'>
                     <h4 className='form-type-checkboxes-symbol-alone-title'>SOLO SÍMBOLO</h4>
-                    <input value={this.state.check3} onClick = {(e) => {this.setState({logoType: 'soloSimbolo'})}} type='checkbox' id="checkb-t3" className='form-type-checkboxes-symbol-alone-check'></input>
+                    <input defaultChecked={this.state.check3} onClick = {(e) => {this.setState({logoType: 'soloSimbolo'})}} type='checkbox' id="checkb-t3" className='form-type-checkboxes-symbol-alone-check'></input>
                 </div>                
             </div>
         </div>
@@ -71,15 +118,15 @@ export default class StyleFormComponent extends Component {
             <div className='form-type-checkboxes'>
                 <div className='form-type-checkboxes-typography form-div'>
                     <h4 className='form-type-checkboxes-typography-title'>SANS SERIF</h4>
-                    <input value={this.state.check4} onClick = {(e) => {this.setState({typePreference: 'sansSerif'})}} type='checkbox' id="checkb-f1" className='form-type-checkboxes-typography-check'></input>
+                    <input defaultChecked={this.state.check4} onClick = {(e) => {this.setState({typePreference: 'sansSerif'})}} type='checkbox' id="checkb-f1" className='form-type-checkboxes-typography-check'></input>
                 </div>
                 <div className='form-type-checkboxes-symbol-with form-div'>
                     <h4 className='form-type-checkboxes-symbol-with-title'>SERIF</h4>
-                    <input value={this.state.check5} onClick = {(e) => {this.setState({typePreference: 'Serif'})}} type='checkbox' id="checkb-f2" className='form-type-checkboxes-symbol-with-check'></input>
+                    <input defaultChecked={this.state.check5} onClick = {(e) => {this.setState({typePreference: 'Serif'})}} type='checkbox' id="checkb-f2" className='form-type-checkboxes-symbol-with-check'></input>
                 </div>
                 <div className='form-type-checkboxes-symbol-alone form-div'>
                     <h4 className='form-type-checkboxes-symbol-alone-title'>MANUSCRITA</h4>
-                    <input value={this.state.check6} onClick = {(e) => {this.setState({typePreference: 'Manuscrita'})}} type='checkbox' id="checkb-f3" className='form-type-checkboxes-symbol-alone-check'></input>
+                    <input defaultChecked={this.state.check6} onClick = {(e) => {this.setState({typePreference: 'Manuscrita'})}} type='checkbox' id="checkb-f3" className='form-type-checkboxes-symbol-alone-check'></input>
                 </div>                
             </div>
         </div>
