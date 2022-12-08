@@ -3,6 +3,7 @@ import {getRequestsById} from '../script/auth'
 import {useParams} from 'react-router-dom'
 import {app, auth, db, storage} from '../firebase/firebase'
 import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
+import {getStorage, ref, getDownloadURL, uploadBytes} from 'firebase/storage'
 import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import queryString from 'query-string';
 
@@ -46,7 +47,36 @@ export default class AdminPageRequest extends Component {
             wantsNotifWhatsapp: '',
             wantsNotifSMS: '',
             acceptedMethodology: '',
+            img1: '',
+            img2: '',
+            img3: '',
+
         }
+    }
+
+    async getImage(toRef, file, img){
+        setTimeout(() => {
+            validateUser();
+            getDownloadURL(ref(storage, `images/${toRef}/${auth.currentUser.uid}/${file}`))
+            .then((url) => {
+
+              if(img == 'img1'){
+                this.setState({img1: url})
+              }
+              
+              if(img == 'img2'){
+                this.setState({img2: url})
+              }
+              
+              if(img == 'img3'){
+                this.setState({img3: url})
+              }
+            })
+            .catch((error) => {
+              // Handle any errors
+            });
+            
+          },2000)
     }
 
     async componentDidMount(){
@@ -101,6 +131,9 @@ export default class AdminPageRequest extends Component {
                         this.setState({wantsNotifSMS: docSnap.data().bool_wantsNotifSMS.toString()})
                         this.setState({acceptedMethodology: docSnap.data().bool_acceptedMethodology.toString()})
 
+                        this.getImage('examplePics', 'example1', 'img1');
+                        this.getImage('examplePics', 'example2', 'img2');
+                        this.getImage('examplePics', 'example3', 'img3');
                     }
                     else{
 
@@ -160,7 +193,15 @@ export default class AdminPageRequest extends Component {
                         <p>Quiere notificaciones por correo: {this.state.wantsNotifEmail}</p>
                         <p>Quiere notificaciones por WhatsApp: {this.state.wantsNotifWhatsapp}</p>
                         <p>Quiere notificaciones por SMS: {this.state.wantsNotifSMS}</p>
-                        <p>Aceptó metodología {this.state.acceptedMethodology}</p>
+                        <p>Aceptó metodología: {this.state.acceptedMethodology}</p>
+                    </div>
+                    <div>
+                        <img src={this.state.img1} alt="" />
+                        <img src={this.state.img2} alt="" />
+                        <img src={this.state.img3} alt="" />
+                    </div>
+                    <div>
+                        <button>Pago Realizado</button>
                     </div>
             </div>
             <div>

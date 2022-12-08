@@ -9,14 +9,20 @@ let userId = '';
 let userData = '';
 
 export async function sendUserToDatabase(userData) {
-  try{
-    await setDoc(doc(db, "users", auth.currentUser.uid), userData);
-    alert("User created");
+  if(!userExists){
+    try{
+      await setDoc(doc(db, "users", auth.currentUser.uid), userData);
+      alert("User created");
+    }
+  
+    catch(error){
+      console.log(error);
+    }
+  }
+  else{
+
   }
 
-  catch(error){
-    console.log(error);
-  }
 }
 
 export async function logIn(provider){
@@ -59,16 +65,16 @@ export function logOut(){
 }
 
 export async function userExists(){
-  let docRef = doc(db, "users", auth.currentUser.uid);
-
-  docRef.get().then((doc) => {
-    if(doc.exists){
-      return(true);
+  getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap => {
+    if(docSnap.exists()){
+      return true;
     }
     else{
-      return(false);
+      return false;
     }
   })
+
+  
 }
 
 export async function validateUser(){
@@ -98,8 +104,12 @@ export async function updateUserData(userData) {
 export async function uploadImage(toRef, file) {
   const storageRef = ref(storage, toRef);
 
-  uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('File uploaded');
+  const metadata = {
+    contentType: 'image/png',
+  };
+
+  uploadBytes(storageRef, file, metadata).then((snapshot) => {
+    alert('File uploaded');
   })
 }
 
@@ -118,8 +128,10 @@ export async function getImage(toRef, file){
       };
       xhr.open('GET', url);
       xhr.send();
-  
-      return xhr;
+
+      console.log(url)
+
+      return url;
     })
     .catch((error) => {
       // Handle any errors

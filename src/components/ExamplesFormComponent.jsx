@@ -17,13 +17,17 @@ export default class ExamplesFormComponent extends Component{
     }
 
     uploadImage(){
+        console.log(this.state.imageUpload1);
         if(this.state.imageUpload1 != null){
+            console.log(this.state.imageUpload1);
             uploadImage(`images/examplePics/${auth.currentUser.uid}/example1`, this.state.imageUpload1)
         }
         if(this.state.imageUpload2 != null){
+            console.log(this.state.imageUpload2);
             uploadImage(`images/examplePics/${auth.currentUser.uid}/example2`, this.state.imageUpload2)
         }
         if(this.state.imageUpload3 != null){
+            console.log(this.state.imageUpload3);
             uploadImage(`images/examplePics/${auth.currentUser.uid}/example3`, this.state.imageUpload3)
         }
     }
@@ -37,19 +41,19 @@ export default class ExamplesFormComponent extends Component{
         <div className='form-chooselogo'>
             <div className='form-chooselogo-select form-chooselogo-select-first'>
                 <h4 className='form-chooselogo-select-title form-chooselogo-select-title-first'>LOGO 1</h4>
-                <input onChange = {(event) => {this.setState({imageUpload1: event.target.value[0]})}}  className='form-chooselogo-select-input form-chooselogo-select-input-first' type='file'></input>
+                <input onChange = {(event) => {this.setState({imageUpload1: event.target.files[0]})}}  className='form-chooselogo-select-input form-chooselogo-select-input-first' type='file'></input>
                 <p className='form-chooselogo-select-p form-chooselogo-select-p-first'>DIME ALGO DE ESE LOGO (OPCIONAL)</p>
                 <textarea className='form-chooselogo-select-textarea form-chooselogo-select-textarea-first'></textarea>
             </div>
             <div className='form-chooselogo-select form-chooselogo-select-second'>
                 <h4 className='form-chooselogo-select-title form-chooselogo-select-title-second'>LOGO 2</h4>
-                <input onChange = {(event) => {this.setState({imageUpload2: event.target.value[0]})}} className='form-chooselogo-select-input form-chooselogo-select-input-second'  type='file'></input>
+                <input onChange = {(event) => {this.setState({imageUpload2: event.target.files[0]})}} className='form-chooselogo-select-input form-chooselogo-select-input-second'  type='file'></input>
                 <p className='form-chooselogo-select-p form-chooselogo-select-p-second'>DIME ALGO DE ESE LOGO (OPCIONAL)</p>
                 <textarea className='form-chooselogo-select-textarea form-chooselogo-select-textarea-second'></textarea>
             </div>
             <div>
                 <h4 className='form-chooselogo-select-title form-chooselogo-select-title-third'>LOGO 3</h4>
-                <input onChange = {(event) => {this.setState({imageUpload3: event.target.value[0]})}} className='form-chooselogo-select-input form-chooselogo-select-input-third' type='file'></input>
+                <input onChange = {(event) => {this.setState({imageUpload3: event.target.files[0]})}} className='form-chooselogo-select-input form-chooselogo-select-input-third' type='file'></input>
                 <p className='form-chooselogo-select-p form-chooselogo-select-p-third'>DIME ALGO DE ESE LOGO (OPCIONAL)</p>
                 <textarea className='form-chooselogo-select-textarea form-chooselogo-select-textarea-third'></textarea>
             </div>
