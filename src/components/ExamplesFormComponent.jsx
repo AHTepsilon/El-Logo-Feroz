@@ -18,13 +18,13 @@ export default class ExamplesFormComponent extends Component{
 
     uploadImage(){
         if(this.state.imageUpload1 != null){
-            uploadImage(`images/examplePics/${auth.currentUser.uid}/${this.state.imageUpload1.name + v4()}`, this.state.imageUpload1)
+            uploadImage(`images/examplePics/${auth.currentUser.uid}/example1`, this.state.imageUpload1)
         }
         if(this.state.imageUpload2 != null){
-            uploadImage(`images/examplePics/${auth.currentUser.uid}/${this.state.imageUpload2.name + v4()}`, this.state.imageUpload2)
+            uploadImage(`images/examplePics/${auth.currentUser.uid}/example2`, this.state.imageUpload2)
         }
         if(this.state.imageUpload3 != null){
-            uploadImage(`images/examplePics/${auth.currentUser.uid}/${this.state.imageUpload3.name + v4()}`, this.state.imageUpload3)
+            uploadImage(`images/examplePics/${auth.currentUser.uid}/example3`, this.state.imageUpload3)
         }
     }
 

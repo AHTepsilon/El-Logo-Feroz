@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import {app, auth, db, storage} from '../firebase/firebase'
 import { doc, setDoc, updateDoc, collection, getDoc, getDocs } from "firebase/firestore"; 
-import {ref, uploadBytes} from 'firebase/storage'
+import {getStorage, ref, getDownloadURL, uploadBytes} from 'firebase/storage'
 const GoogleProvider = new GoogleAuthProvider();
 
 let userId = '';
@@ -103,6 +103,31 @@ export async function uploadImage(toRef, file) {
   })
 }
 
+export async function getImage(toRef, file){
+  setTimeout(() => {
+    validateUser();
+    getDownloadURL(ref(storage, `images/${toRef}/${auth.currentUser.uid}/${file}`))
+    .then((url) => {
+      // `url` is the download URL for 'images/stars.jpg'
+  
+      // This can be downloaded directly:
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = (event) => {
+        const blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+  
+      return xhr;
+    })
+    .catch((error) => {
+      // Handle any errors
+    });
+    
+  },2000)
+}
+
 export async function getRequestsById(id){
   let requests = [];
   
@@ -113,6 +138,6 @@ export async function getRequestsById(id){
 
   console.log(requests);
 
-  /*let filteredRequests = requests.filter((item) => id === item.id)
-  return filteredRequests ? filteredRequests[0] : null*/
+  let filteredRequests = requests.filter((item) => id === item.id)
+  return filteredRequests ? filteredRequests[0] : null
 }

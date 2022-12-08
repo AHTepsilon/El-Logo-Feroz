@@ -30,7 +30,7 @@ export default class AdminPage extends Component {
     render(){
 
         let renderedList = this.state.itemsArray.map(item => 
-        <Link className='admin-page-section-blocks-list-a' to={{pathname: `Request/${item.id}`}}><li className='admin-page-section-blocks-list-item' key={item}>
+        <Link className='admin-page-section-blocks-list-a' key={item} to={{pathname: `Request/${item.id}`}}><li className='admin-page-section-blocks-list-item'>
                 <h2>{item.nombreEmprendimiento}</h2>
                 <p>{item.id}</p>
                 <p>{item.estado}</p>
