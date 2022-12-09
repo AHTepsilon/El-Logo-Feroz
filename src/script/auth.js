@@ -114,6 +114,14 @@ export async function uploadImage(toRef, file) {
   })
 }
 
+export async function uploadOtherData(toRef, file){
+  const storageRef = ref(storage, toRef);
+  
+  uploadBytes(`files/${auth.currentUser.uid}/${file}`, file).then((snapshot) => {
+    console.log(file)
+  })
+}
+
 export async function getImage(toRef, file){
   setTimeout(() => {
     validateUser();
