@@ -66,27 +66,27 @@ export default class FinalPage extends Component {
     }
 
     render(){
-        return <>
-        <div>
-            <h1>DESCARGA TUS ARCHIVOS</h1>
-            <h2>FALTAN 60 DÍAS PARA QUE LOS ARCHIVOS DEJEN DE ESTAR DISPONIBLES</h2>
+        return <div className = 'centralDiv'>
+        <div className = 'titleDiv'>
+            <h1 className = 'titleDiv-h1'>DESCARGA TUS ARCHIVOS</h1>
+            <h2 className = 'titleDiv-h2'>FALTAN 60 DÍAS PARA QUE LOS ARCHIVOS DEJEN DE ESTAR DISPONIBLES</h2>
         </div>
         <div className='imageDiv'>
             <img className='imageDiv-img' src={this.state.imageLink} alt="" />
         </div>
-        <div>
-            <h3>Tus archivos estarán listos en breve!</h3>
-            <h4>Recarga la página</h4>
+        <div className = 'subtitlesDiv'>
+            <h3 className = 'subtitlesDiv-h3'>Tus archivos estarán listos en breve!</h3>
+            <h4 className = 'subtitlesDiv-h4'>Recarga la página</h4>
         </div>
-        <div>
-            <p>LOGO.AI (ADOBE ILLUSTRATOR)</p> <button onClick={() => this.downloadFile('AIfile')} disabled = {!this.state.AIfile}>DESCARGAR</button>
-            <p>LOGO.PNG (MAPA DE BITS)</p> <button onClick={() => this.downloadFile('PNGfile')} disabled = {!this.state.PNGfile}>DESCARGAR</button>
-            <p>COLORÍMETRÍA.PDF</p> <button onClick={() => this.downloadFile('Colorimetria')} disabled = {!this.state.Colorimetria}>DESCARGAR</button>
-            <p>RRSS-PERFIL.PNG</p> <button onClick={() => this.downloadFile('RRSSpe')} disabled = {!this.state.RRSSpe}>DESCARGAR</button>
-            <p>RRSS-PORTADA.PNG</p> <button onClick={() => this.downloadFile('RRSSpo')}  disabled = {!this.state.RRSSpo}>DESCARGAR</button>
-            <p>PAPEL-TAPIZ.PNG</p> <button onClick={() => this.downloadFile('PT')} disabled = {!this.state.pT}>DESCARGAR</button>
-            <p>UN-REGALO-PARA-TI</p> <button onClick={() => this.downloadFile('Gift')} disabled = {!this.state.Gift}>DESCARGAR</button>
+        <div className = 'inputsDiv'>
+            <div className = 'inputsDiv-div'><p>LOGO.AI (ADOBE ILLUSTRATOR)</p> <button onClick={() => this.downloadFile('AIfile')} disabled = {!this.state.AIfile}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>LOGO.PNG (MAPA DE BITS)</p> <button onClick={() => this.downloadFile('PNGfile')} disabled = {!this.state.PNGfile}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>COLORÍMETRÍA.PDF</p> <button onClick={() => this.downloadFile('Colorimetria')} disabled = {!this.state.Colorimetria}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>RRSS-PERFIL.PNG</p> <button onClick={() => this.downloadFile('RRSSpe')} disabled = {!this.state.RRSSpe}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>RRSS-PORTADA.PNG</p> <button onClick={() => this.downloadFile('RRSSpo')}  disabled = {!this.state.RRSSpo}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>PAPEL-TAPIZ.PNG</p> <button onClick={() => this.downloadFile('PT')} disabled = {!this.state.pT}>DESCARGAR</button></div>
+            <div className = 'inputsDiv-div'><p>UN-REGALO-PARA-TI</p> <button onClick={() => this.downloadFile('Gift')} disabled = {!this.state.Gift}>DESCARGAR</button></div>
         </div>
-        </>
+        </div>
     }
 }

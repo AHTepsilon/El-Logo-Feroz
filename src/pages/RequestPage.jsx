@@ -187,40 +187,49 @@ export default class RequestPage extends Component {
         <div className="mainDiv">
           <h1 className="mainDiv-title">{this.state.headline}</h1>
           <div className="mainDiv-div">
-              <img className="mainDiv-div-form-img" src={this.state.img1}></img>
-              <input
-                checked={this.state.img1Selected}
-                onChange={(e) => {
-                  this.switchToggles("img1");
-                  (event) => {
-                    this.setState({ img1Selected: !this.state.img1Selected });
-                  };
-                }}
-                type="checkbox"
-              ></input>
-              <img className="mainDiv-div-form-img" src={this.state.img2}></img>
-              <input
-                checked={this.state.img2Selected}
-                onChange={(e) => {
-                  this.switchToggles("img2");
-                  (event) => {
-                    this.setState({ img2Selected: !this.state.img2Selected });
-                  };
-                }}
-                type="checkbox"
-              ></input>
-              <img className="mainDiv-div-form-img" src={this.state.img3}></img>
-              <input
-                checked={this.state.img3Selected}
-                onChange={(e) => {
-                  this.switchToggles("img3");
-                  (event) => {
-                    this.setState({ img3Selected: !this.state.img3Selected });
-                  };
-                }}
-                type="checkbox"
-              ></input>
-              <button
+            <div className="mainDiv-div-inner">
+            <div>
+              <img className="mainDiv-div-inner-img" src={this.state.img1}></img>
+                <input
+                  checked={this.state.img1Selected}
+                  onChange={(e) => {
+                    this.switchToggles("img1");
+                    (event) => {
+                      this.setState({ img1Selected: !this.state.img1Selected });
+                    };
+                  }}
+                  type="checkbox"
+                ></input>
+              </div>
+              <div>
+                <img className="mainDiv-div-inner-img" src={this.state.img2}></img>
+                <input
+                  checked={this.state.img2Selected}
+                  onChange={(e) => {
+                    this.switchToggles("img2");
+                    (event) => {
+                      this.setState({ img2Selected: !this.state.img2Selected });
+                    };
+                  }}
+                  type="checkbox"
+                ></input>
+                </div>
+                <div>
+                <img className="mainDiv-div-inner-img" src={this.state.img3}></img>
+                <input
+                  checked={this.state.img3Selected}
+                  onChange={(e) => {
+                    this.switchToggles("img3");
+                    (event) => {
+                      this.setState({ img3Selected: !this.state.img3Selected });
+                    };
+                  }}
+                  type="checkbox"
+                ></input>
+                </div>
+              </div>
+              <div className='mainDiv-buttons'>
+              <button className='mainDiv-buttons-btn'
                   onClick={(e) => {
                     e.preventDefault;
                     this.acceptImage(
@@ -233,7 +242,7 @@ export default class RequestPage extends Component {
                 ¡LO QUIERO! <br />
                 (PODRÁS DESCARGAR LOS ARCHIVOS ORIGINALES)
               </button>
-              <button
+              <button className='mainDiv-buttons-btn'
                 onClick={(event) => {
                   event.preventDefault();
                   this.setState({ askedForModif: !this.state.askedForModif });
@@ -242,6 +251,7 @@ export default class RequestPage extends Component {
                 HACER MODIFICACIÓN <br />
                 (TU PLAN TIENE 1 MODIFICACIÓN)
               </button>
+              </div>
             {this.state.askedForModif ? (
               <div>
                 <h2>CUÉNTALE AL LOGO FEROZ TU MODIFICACIÓN</h2>

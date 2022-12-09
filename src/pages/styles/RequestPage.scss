@@ -1,8 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
 .mainDiv{
+    &-title{
+        font-family: 'Josefin Sans', sans-serif;
+    }
     &-div{
-        &-form{
-            &-img{
-                height: 15em;
+            display: flex;
+            flex-direction: column;
+            &-inner{
+                display: flex;
+                flex-direction: row;
+
+                align-items: center;
+                justify-content: center;
+
+                margin-bottom: 2em;
+
+                &-img{
+                    height: 10em;
+                    margin: 2em;
+                }
+            }
+    }
+
+    &-buttons{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+
+        &-btn{
+            margin: 1em;
+            width: 15em;
+            height: 5em;
+            border-radius: 5px;
+            border: 1px dashed;
+            border-color: $gray;
+            background-color: white;
+            color: $hotPink;
+            font-family: 'Josefin Sans', sans-serif;
+
+            &:hover{
+                cursor: pointer;
+                background-color: darken(white, 4%);  
+            }
+
+            &:focus{
+                background-color: $hotPink;
+                color: white;
             }
         }
     }

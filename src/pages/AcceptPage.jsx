@@ -53,9 +53,9 @@ export default class AcceptPage extends Component {
         return <>
             <div className='mainDiv'>
                 <img className='mainDiv-img' src = {this.state.imageLink}></img>
-                <h2>¿CONFIRMAS QUE ESTE SERÁ TU LOGO?</h2>
-                <h3>SI CONFIRMAS, NO HAY MARCHA ATRÁS</h3>
-                <button onClick={this.confirmImage}>¡CONFIRMADO!</button>
+                <h2  className='mainDiv-title'>¿CONFIRMAS QUE ESTE SERÁ TU LOGO?</h2>
+                <h3  className='mainDiv-subtitle'>SI CONFIRMAS, NO HAY MARCHA ATRÁS</h3>
+                <button  className='mainDiv-btn' onClick={this.confirmImage}>¡CONFIRMADO!</button>
             </div>
         </>
     }

@@ -1,5 +1,82 @@
-.imageDiv{
-    &-img{
-        height: 15em;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+$hotPink: #F32178;
+$gray: #DDDDDD;
+$darkGray: #2B2B2B;
+
+.centralDiv{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    .titleDiv{
+        text-align: center;
+        font-family: 'Josefin Sans', sans-serif;
+
+        &-h1{
+            color: $darkGray;
+        }
+
+        &-h2{
+            color: $hotPink;
+        }
     }
-}
+
+    .subtitlesDiv{
+        display: flex;
+        flex-direction: column;
+    
+        align-items: center;
+        justify-content: center;
+        
+        
+        &-h3{
+            color: $darkGray;
+        }
+
+        &-h4{
+            color: $hotPink;
+        }
+    }
+
+    .imageDiv{
+        &-img{
+            height: 15em;
+        }
+    }
+
+    .inputsDiv{
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+        &-div{
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            p{
+                margin: 1.5em;
+            }
+
+            button{
+                width: 15em;
+                height: 2em;
+
+                border-radius: 10px;
+                border: none;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color:darken($gray, 10%)
+                }
+                
+            }
+        }
+    }
+} 
