@@ -35,7 +35,7 @@ export default class LogInPage extends Component{
     validateUser();
             setTimeout(() => {
                 if(auth.currentUser != '' && auth.currentUser != null){
-                    window.location.href = '/FirstPage'
+                    window.top.location = '/FirstPage'
                 }
             }, 2000)
     }

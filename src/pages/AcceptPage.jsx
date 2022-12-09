@@ -29,7 +29,7 @@ export default class AcceptPage extends Component {
             estado: 'Aceptado'
         }
         await updateDoc(doc(db, "requests", auth.currentUser.uid), newStatus);
-        window.location.href = '/FinalPage';
+        window.top.location = '/FinalPage';
     }
 
     async componentDidMount() {

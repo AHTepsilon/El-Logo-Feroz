@@ -54,7 +54,7 @@ export default class FirstPage extends Component {
 
         if (this.state.businessName != ''){
             updateUserData(user).then(() => {
-                window.location.href = '/SecondPage'
+                window.top.location = '/SecondPage'
             })
         }
         else{

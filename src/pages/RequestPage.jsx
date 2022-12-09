@@ -87,7 +87,7 @@ export default class RequestPage extends Component {
           imgToAccept: this.state.img1
         }
         await updateDoc(doc(db, "requests", auth.currentUser.uid), newImage).then(() => {
-          window.location.href = '/AcceptPage'
+          window.top.location = '/AcceptPage'
         });
         
       }
@@ -96,7 +96,7 @@ export default class RequestPage extends Component {
           imgToAccept: this.state.img2
         }
         await updateDoc(doc(db, "requests", auth.currentUser.uid), newImage).then(() => {
-          window.location.href = '/AcceptPage'
+          window.top.location = '/AcceptPage'
         });
       }
       if (selectedImg3) {
@@ -104,7 +104,7 @@ export default class RequestPage extends Component {
           imgToAccept: this.state.img3
         }
         await updateDoc(doc(db, "requests", auth.currentUser.uid), newImage).then(() => {
-          window.location.href = '/AcceptPage'
+          window.top.location = '/AcceptPage'
         });
       }
     } catch (error) {

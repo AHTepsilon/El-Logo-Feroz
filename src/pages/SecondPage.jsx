@@ -50,7 +50,7 @@ export default class SecondPage extends Component {
 
         if (this.state.economicSector != ''){
             updateUserData(user).then(() => {
-                window.location.href = '/ThirdPage'
+                window.top.location = '/ThirdPage'
             })
         }
         else{

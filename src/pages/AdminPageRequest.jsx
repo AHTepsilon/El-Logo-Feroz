@@ -323,26 +323,30 @@ export default class AdminPageRequest extends Component {
             this.setState({ disenoTipo: docSnap.data().disenoTipo });
             this.setState({ planSize: docSnap.data().planSize });
             this.setState({ promoCode: docSnap.data().promoCode });
-            this.setState({
+            
+            docSnap.data().sinAnimoDeLucro ? this.setState({
               sinAnimoDeLucro: docSnap.data().sinAnimoDeLucro.toString(),
-            });
+            }) : this.setState({sinAnimoDeLucro:''});
 
-            this.setState({
+            docSnap.data().bool_wantsNotifEmail ? this.setState({
               wantsNotifEmail: docSnap.data().bool_wantsNotifEmail.toString(),
-            });
-            this.setState({
+            }) : this.setState({wantsNotifEmail:''});
+            
+            docSnap.data().bool_wantsNotifEmail ? this.setState({
               wantsNotifWhatsapp: docSnap
                 .data()
                 .bool_wantsNotifWhatsapp.toString(),
-            });
-            this.setState({
+            }) : this.setState({wantsNotifWhatsapp:''});
+           
+            docSnap.data().bool_wantsNotifSMS ? this.setState({
               wantsNotifSMS: docSnap.data().bool_wantsNotifSMS.toString(),
-            });
-            this.setState({
+            }) : this.setState({wantsNotifSMS:''});
+            
+            docSnap.data().bool_acceptedMethodology ? this.setState({
               acceptedMethodology: docSnap
                 .data()
-                .correccion.toString(),
-            });
+                .bool_acceptedMethodology.toString(),
+            }) : this.setState({acceptedMethodology:''});
 
             this.setState({
               revision: docSnap

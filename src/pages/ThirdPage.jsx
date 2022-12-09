@@ -62,7 +62,7 @@ export default class ThirdPage extends Component {
 
         if (this.state.economicSector != ''){
             updateUserData(user).then(() => {
-                window.location.href = '/DataGatheringPage'
+                window.top.location = '/DataGatheringPage'
             })
         }
         else{
