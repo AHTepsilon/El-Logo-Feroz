@@ -48,7 +48,7 @@ function sendData(){
           }
           updateDoc(doc(db, "requests", auth.currentUser.uid), newDataToSend);
           alert('Solicitud enviada, espera a que El Logo Feroz! haga su magia!');
-          //window.location.href = '/RequestPage';
+          window.location.href = '/RequestPage';
         });
       }
       catch(error){

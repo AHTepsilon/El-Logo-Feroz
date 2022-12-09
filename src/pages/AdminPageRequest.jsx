@@ -118,35 +118,6 @@ export default class AdminPageRequest extends Component {
         }
     }
 
-    updateStatus = async () => {
-        this.setState({status: 'Esperando Respuesta'})
-
-        let newStatus = {
-            'estado': 'Esperando Respuesta'
-        }
-
-        console.log('images', his.state.imgToSend1, his.state.imgToSend2, his.state.imgToSend3)
-
-        if(this.state.imgToSend1 != '' && this.state.imgToSend2 != '' && this.state.imgToSend3 != ''){
-            
-            if(this.state.payment == 'Realizado'){
-                try{
-                    await updateDoc(doc(db, "requests", auth.currentUser.uid), newStatus);
-                    alert('Estado del pedido actualizado');
-                } 
-                catch(error){
-                    console.log(error)
-                }
-            }
-            else{
-                alert('Por favor asegúrate que el usuario haya realizado el pago');
-            }
-        }
-        else{
-            alert('Por favor subir todas las imagenes');
-        }
-    }
-
     uploadImages = async () => {
         try{
             uploadImage(`images/propuestas/${auth.currentUser.uid}/propuesta1`, this.state.imgToSend1)

@@ -8,6 +8,7 @@ import LogInPage from './pages/LogInPage'
 import DataGatheringPage from './pages/DataGatheringPage'
 import RequestPage from './pages/RequestPage'
 import AdminPage from './pages/AdminPage'
+import AcceptPage from './pages/AcceptPage'
 import AdminPageRequest from './pages/AdminPageRequest'
 import './index.scss'
 
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/RequestPage" element={<RequestPage />}></Route>
         <Route path="/Admin" element={<AdminPage />}></Route>
         <Route path="/Admin/Request/:id" element={<AdminPageRequest />}></Route>
+        <Route path="/AcceptPage" element={<AcceptPage />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>

@@ -1,7 +1,9 @@
 .mainDiv{
     &-div{
-        &-img{
-            height: 15em;
+        &-form{
+            &-img{
+                height: 15em;
+            }
         }
     }
 }
