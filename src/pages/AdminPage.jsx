@@ -15,16 +15,22 @@ export default class AdminPage extends Component {
     }
 
     async componentDidMount() {
-        validateUser();
-        let items = [];
-
-        const querySnapshot = await getDocs(collection(db, 'requests'));
-        querySnapshot.forEach((doc) => {
-            items.push(doc.data());
-        })
-
-        this.setState({itemsArray: items});
-        console.log({itemsArray: [...this.state.itemsArray, ...items]});
+        try{
+            validateUser();
+            let items = [];
+    
+            const querySnapshot = await getDocs(collection(db, 'requests'));
+            querySnapshot.forEach((doc) => {
+                items.push(doc.data());
+            })
+    
+            this.setState({itemsArray: items});
+            console.log({itemsArray: [...this.state.itemsArray, ...items]});
+        }
+        catch(error){
+            console.log(error);
+            window.location.reload(false);
+        }
     }
 
     render(){

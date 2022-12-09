@@ -44,6 +44,7 @@ export default class AcceptPage extends Component {
                     }
                 catch(error){
                     console.log(error);
+                    window.location.reload(false);
                 }
             }, 2000)
         }

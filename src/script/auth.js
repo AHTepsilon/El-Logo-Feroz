@@ -105,11 +105,7 @@ export async function updateUserData(userData) {
 export async function uploadImage(toRef, file) {
   const storageRef = ref(storage, toRef);
 
-  const metadata = {
-    contentType: 'image/png',
-  };
-
-  uploadBytes(storageRef, file, metadata).then((snapshot) => {
+  uploadBytes(storageRef, file).then((snapshot) => {
     console.log(file)
   })
 }

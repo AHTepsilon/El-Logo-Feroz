@@ -68,6 +68,8 @@ export default class AdminPageRequest extends Component {
       imgToSend5: "",
       imgToSend6: "",
       acceptedImage: "",
+      imgForRevision: "",
+      revision: "",
     };
   }
 
@@ -77,12 +79,16 @@ export default class AdminPageRequest extends Component {
         getDoc(doc(db, "requests", auth.currentUser.uid)).then((docSnap) => {
           if (docSnap.exists()) {
             if (docSnap.data().estado == "Aceptado") {
-              this.setState({acceptedImage: docSnap.data().imgToAccept});
+              this.setState({ acceptedImage: docSnap.data().imgToAccept });
+            }
+            if (docSnap.data().estado == "Enviado para Revisión") {
+              this.setState({ imgForRevision: docSnap.data().imgToRevision });
             }
           }
         });
       } catch (error) {
         console.log(error);
+        window.location.reload(false);
       }
     }, 2000);
   }
@@ -139,9 +145,63 @@ export default class AdminPageRequest extends Component {
     }
   };
 
-  uploadData = async (file) => {
-    uploadOtherData(`files/${auth.currentUser.uid}/${file}`, file)
-  }
+  uploadData = async (file, name) => {
+    try{
+    uploadImage(`files/${auth.currentUser.uid}/${name}`, file);
+
+    if(name == 'AIfile'){
+      let dataToUpload = {
+        file_AIfile: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'PNGfile'){
+      let dataToUpload = {
+        file_PNGfile: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'Colorimetria'){
+      let dataToUpload = {
+        file_Colorimetria: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'RRSSPe'){
+      let dataToUpload = {
+        file_RRSSPe: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'RRSSPo'){
+      let dataToUpload = {
+        file_RRSSPo: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'PT'){
+      let dataToUpload = {
+        file_PT: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+      
+    if(name == 'Gift'){
+      let dataToUpload = {
+        file_Gift: true
+      }
+      await updateDoc(doc(db, "requests", auth.currentUser.uid), dataToUpload);
+      }
+    }
+    catch(error){
+      console.log(error)
+    }
+  };
 
   uploadImages = async () => {
     try {
@@ -281,7 +341,13 @@ export default class AdminPageRequest extends Component {
             this.setState({
               acceptedMethodology: docSnap
                 .data()
-                .bool_acceptedMethodology.toString(),
+                .correccion.toString(),
+            });
+
+            this.setState({
+              revision: docSnap
+                .data()
+                .correccion
             });
 
             this.getImage("examplePics", "example1", "img1");
@@ -447,20 +513,95 @@ export default class AdminPageRequest extends Component {
             </div>
           </div>
           {this.state.status == "Aceptado" ? (
-            <div className = 'accepted-div'>
-                <h2>Propuesta Aceptada</h2>
-                <img className = 'accepted-div-img' src={this.state.acceptedImage}></img>
-                <p>Subir Archivo AI</p><input type='file' onChange={(event) => {this.uploadData(event.target.files[0])}}></input>
-                <p>Subir Archivo PNG</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
-                <p>Subir colorimetría</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
-                <p>Subir RRSS-Perfil</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
-                <p>Subir RRSS-Portada</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
-                <p>Subir Papel Tapiz</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
-                <p>Subir Regalo</p><input type='file' onChange={(event) => {this.uploadData()}}></input>
+            <div className="accepted-div">
+              <h2>Propuesta Aceptada</h2>
+              <img
+                className="accepted-div-img"
+                src={this.state.acceptedImage}
+              ></img>
+              <p>Subir Archivo AI</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "AIfile");
+                }}
+              ></input>
+              <p>Subir Archivo PNG</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "PNGfile");
+                }}
+              ></input>
+              <p>Subir colorimetría</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "Colorimetria");
+                }}
+              ></input>
+              <p>Subir RRSS-Perfil</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "RRSSPe");
+                }}
+              ></input>
+              <p>Subir RRSS-Portada</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "RRSSPo");
+                }}
+              ></input>
+              <p>Subir Papel Tapiz</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "PT");
+                }}
+              ></input>
+              <p>Subir Regalo</p>
+              <input
+                type="file"
+                onChange={(event) => {
+                  this.uploadData(event.target.files[0], "Gift");
+                }}
+              ></input>
             </div>
           ) : (
-            <div>
+            <div></div>
+          )}
+          {this.state.status == "Enviado para Revisión" ? (
+            <div className="revision-div">
+              <h2>Propuesta para modificar</h2>
+              <img
+                className="revision-div-img"
+                src={this.state.imgForRevision}
+              ></img>
+              <p>Aspectos a modificar: {this.state.revision}</p>
+              <input
+                onChange={(event) => {
+                  this.setState({ imgToSend1: event.target.files[0] });
+                }}
+                type="file"
+              ></input>
+              <input
+                onChange={(event) => {
+                  this.setState({ imgToSend2: event.target.files[0] });
+                }}
+                type="file"
+              ></input>
+              <input
+                onChange={(event) => {
+                  this.setState({ imgToSend3: event.target.files[0] });
+                }}
+                type="file"
+              ></input>
+              <button onClick={this.uploadImages}>Enviar Propuestas</button>
             </div>
+          ) : (
+            <div></div>
           )}
         </div>
         <div></div>

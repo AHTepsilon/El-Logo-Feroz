@@ -46,7 +46,8 @@ export default class ThirdPage extends Component {
                 })
               }
               catch(error){
-                console.log(error)
+                console.log(error);
+                window.location.reload(false);
               }
         }, 1000);
     }

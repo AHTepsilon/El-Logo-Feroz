@@ -31,6 +31,15 @@ export default class LogInPage extends Component{
 
     }
 
+    async componentDidMount(){
+    validateUser();
+            setTimeout(() => {
+                if(auth.currentUser != '' && auth.currentUser != null){
+                    window.location.href = '/FirstPage'
+                }
+            }, 2000)
+    }
+
     handleChange = (event) => {
         console.log(event);
         this.setState({phoneNum: event.target.value})
@@ -45,13 +54,9 @@ export default class LogInPage extends Component{
             }
             validateUser()
             this.setState({userExists: true});
-
-            setTimeout(() =>{
-                window.location.href = '/FirstPage'
-            }, 5000)
         }
         else{
-            alert('Por favor digita un número telefónico y acepta los términos y condiciones y la política de privacidad')
+            alert('Por favor acepta los términos y condiciones y la política de privacidad')
         }
 
     }
@@ -65,7 +70,8 @@ export default class LogInPage extends Component{
                 <Titles className='title' text="YA CASI ESTÁS LISTO PARA COMENZAR"></Titles>
             </div>
             <div className='central-area-div-textbox'>
-                <h4 className='central-area-div-textbox-title-loginpage'>EL LOGO FEROZ! NECESITA SABER TU PAÍS Y NÚMERO DE CELULAR. INICIA SESIÓN CON ALGÚN MÉTODO Y ESTARÁS DENTRO :)</h4>
+                <h4 className='central-area-div-textbox-title-loginpage'>EL LOGO FEROZ! NECESITA SABER TU PAÍS. INICIA SESIÓN CON ALGÚN MÉTODO Y ESTARÁS DENTRO :)</h4>
+                <h4 className='central-area-div-textbox-title-loginpage'>RECARGA LA PÁGINA LUEGO DE INICIAR SESIÓN</h4> 
                 <div className="central-area-div-textbox-input-div">
                     <CountryDropdown  id="UNIQUE_ID" className='central-area-div-textbox-input-div-country' preferredCountries={['co', 'us']}  value="" ></CountryDropdown>
                     {/*<input value={this.state.phoneNum} onChange={(e) => {this.setState({phoneNum: e.target.value})}} type="text" placeholder="Número Telefónico" className="central-area-div-textbox-input-div-input" required></input>*/}

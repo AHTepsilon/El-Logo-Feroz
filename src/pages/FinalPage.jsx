@@ -19,8 +19,27 @@ export default class FinalPage extends Component {
 
         this.state = {
             imageLink: '',
+            AIfile: '',
+            PNGfile: '',
+            Colorimetria: '',
+            RRSSpe: '',
+            RRSSpo: '',
+            pT: '',
+            Gift: '',
         }
     }
+
+    async downloadFile(name){
+        setTimeout(() =>{
+            validateUser();
+            getDownloadURL(
+              ref(storage, `files/${auth.currentUser.uid}/${name}`)
+            )
+              .then((url) => {
+                alert('Usa este link para descargar el archivo: ' + url)
+              })
+            }, 2000)
+        }
 
     async componentDidMount() {
         validateUser();
@@ -29,10 +48,19 @@ export default class FinalPage extends Component {
                 getDoc(doc(db, "requests", auth.currentUser.uid)).then((docSnap) => {
                     if (docSnap.exists()) {
                         this.setState({imageLink:docSnap.data().imgToAccept})
+                        docSnap.data().file_AIfile != null ? this.setState({AIfile:docSnap.data().file_AIfile}) : this.setState({AIfile:false})
+                        docSnap.data().file_PNGfile != null ? this.setState({PNGfile:docSnap.data().file_PNGfile}) : this.setState({PNGfile:false})
+                        docSnap.data().file_Colorimetria != null ? this.setState({Colorimetria:docSnap.data().file_Colorimetria}) : this.setState({Colorimetria:false})
+                        docSnap.data().file_RRSSpe != null ? this.setState({RRSSpe:docSnap.data().file_RRSSpe}) : this.setState({RRSSpe:false})
+                        docSnap.data().file_RRSSpo != null ? this.setState({RRSSpo:docSnap.data().file_RRSSpo}) : this.setState({RRSSpo:false})
+                        docSnap.data().file_PT != null ? this.setState({pT:docSnap.data().file_PT}) : this.setState({pT:false})
+                        docSnap.data().file_Gift != null ? this.setState({Gift:docSnap.data().file_Gift}) : this.setState({Gift:false})
+
                     }})
                 }
             catch(error){
                 console.log(error);
+                window.location.reload(false);
             }
         }, 2000)
     }
@@ -47,13 +75,17 @@ export default class FinalPage extends Component {
             <img className='imageDiv-img' src={this.state.imageLink} alt="" />
         </div>
         <div>
-            <p>LOGO.AI (ADOBE ILLUSTRATOR)</p> <button>DESCARGAR</button>
-            <p>LOGO.PNG (MAPA DE BITS)</p> <button>DESCARGAR</button>
-            <p>COLORÍMETRÍA.PDF</p> <button>DESCARGAR</button>
-            <p>RRSS-PERFIL.PNG</p> <button>DESCARGAR</button>
-            <p>RRSS-PORTADA.PNG</p> <button>DESCARGAR</button>
-            <p>PAPEL-TAPIZ.PNG</p> <button>DESCARGAR</button>
-            <p>UN-REGALO-PARA-TI</p> <button>DESCARGAR</button>
+            <h3>Tus archivos estarán listos en breve!</h3>
+            <h4>Recarga la página</h4>
+        </div>
+        <div>
+            <p>LOGO.AI (ADOBE ILLUSTRATOR)</p> <button onClick={() => this.downloadFile('AIfile')} disabled = {!this.state.AIfile}>DESCARGAR</button>
+            <p>LOGO.PNG (MAPA DE BITS)</p> <button onClick={() => this.downloadFile('PNGfile')} disabled = {!this.state.PNGfile}>DESCARGAR</button>
+            <p>COLORÍMETRÍA.PDF</p> <button onClick={() => this.downloadFile('Colorimetria')} disabled = {!this.state.Colorimetria}>DESCARGAR</button>
+            <p>RRSS-PERFIL.PNG</p> <button onClick={() => this.downloadFile('RRSSpe')} disabled = {!this.state.RRSSpe}>DESCARGAR</button>
+            <p>RRSS-PORTADA.PNG</p> <button onClick={() => this.downloadFile('RRSSpo')}  disabled = {!this.state.RRSSpo}>DESCARGAR</button>
+            <p>PAPEL-TAPIZ.PNG</p> <button onClick={() => this.downloadFile('PT')} disabled = {!this.state.pT}>DESCARGAR</button>
+            <p>UN-REGALO-PARA-TI</p> <button onClick={() => this.downloadFile('Gift')} disabled = {!this.state.Gift}>DESCARGAR</button>
         </div>
         </>
     }
