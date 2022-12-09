@@ -43,11 +43,12 @@ function sendData(){
           console.log(dataToSend)
           setDoc(doc(db, "requests", auth.currentUser.uid), dataToSend);
           let newDataToSend = {
-            'estado': 'Pendiente'
+            'estado': 'Pendiente',
+            'pago': 'Pendiente'
           }
           updateDoc(doc(db, "requests", auth.currentUser.uid), newDataToSend);
           alert('Solicitud enviada, espera a que El Logo Feroz! haga su magia!');
-          window.location.href = '/RequestPage';
+          //window.location.href = '/RequestPage';
         });
       }
       catch(error){

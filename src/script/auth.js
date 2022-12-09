@@ -9,19 +9,20 @@ let userId = '';
 let userData = '';
 
 export async function sendUserToDatabase(userData) {
-  if(!userExists){
-    try{
-      await setDoc(doc(db, "users", auth.currentUser.uid), userData);
-      alert("User created");
+  await getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap => {
+    if(!docSnap.exists()){
+      try{
+        setDoc(doc(db, "users", auth.currentUser.uid), userData);
+        alert("User created");
+      }
+      catch(error){
+        console.log(error);
+      }
     }
-  
-    catch(error){
-      console.log(error);
+    else{
+      return false;
     }
-  }
-  else{
-
-  }
+  })
 
 }
 
@@ -109,7 +110,7 @@ export async function uploadImage(toRef, file) {
   };
 
   uploadBytes(storageRef, file, metadata).then((snapshot) => {
-    alert('File uploaded');
+    console.log(file)
   })
 }
 

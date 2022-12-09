@@ -4,8 +4,9 @@ import {useParams} from 'react-router-dom'
 import {app, auth, db, storage} from '../firebase/firebase'
 import { doc, setDoc, updateDoc, collection, getDoc } from "firebase/firestore"; 
 import {getStorage, ref, getDownloadURL, uploadBytes} from 'firebase/storage'
-import {logIn, logOut, validateUser, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
+import {logIn, logOut, validateUser, uploadImage, sendUserToDatabase, updateUserData, userExists} from '../script/auth'
 import queryString from 'query-string';
+import './styles/AdminPageRequest.scss';
 
 export default class AdminPageRequest extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export default class AdminPageRequest extends Component {
             business: '',
             businessSector: '',
             status: '',
+            payment: '',
             perc1: '',
             perc2: '',
             perc3: '',
@@ -50,6 +52,12 @@ export default class AdminPageRequest extends Component {
             img1: '',
             img2: '',
             img3: '',
+            imgToSend1: '',
+            imgToSend2: '',
+            imgToSend3: '',
+            imgToSend4: '',
+            imgToSend5: '',
+            imgToSend6: '',
 
         }
     }
@@ -71,12 +79,110 @@ export default class AdminPageRequest extends Component {
               if(img == 'img3'){
                 this.setState({img3: url})
               }
+
+              if(img == 'Pimg1'){
+                this.setState({imgToSend1: url})
+              }
+
+              if(img == 'Pimg2'){
+                this.setState({imgToSend2: url})
+              }
+
+              if(img == 'Pimg3'){
+                this.setState({imgToSend3: url})
+              }
             })
             .catch((error) => {
               // Handle any errors
             });
             
           },2000)
+    }
+
+    updatePayment = async () => {
+
+        if(this.state.img1)
+
+        this.setState({payment: 'Realizado'})
+
+        let newPayment = {
+            'pago': 'Realizado'
+        }
+
+        try{
+            await updateDoc(doc(db, "requests", auth.currentUser.uid), newPayment);
+            alert('Estado del pago actualizado');
+        } 
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    updateStatus = async () => {
+        this.setState({status: 'Esperando Respuesta'})
+
+        let newStatus = {
+            'estado': 'Esperando Respuesta'
+        }
+
+        console.log('images', his.state.imgToSend1, his.state.imgToSend2, his.state.imgToSend3)
+
+        if(this.state.imgToSend1 != '' && this.state.imgToSend2 != '' && this.state.imgToSend3 != ''){
+            
+            if(this.state.payment == 'Realizado'){
+                try{
+                    await updateDoc(doc(db, "requests", auth.currentUser.uid), newStatus);
+                    alert('Estado del pedido actualizado');
+                } 
+                catch(error){
+                    console.log(error)
+                }
+            }
+            else{
+                alert('Por favor asegúrate que el usuario haya realizado el pago');
+            }
+        }
+        else{
+            alert('Por favor subir todas las imagenes');
+        }
+    }
+
+    uploadImages = async () => {
+        try{
+            uploadImage(`images/propuestas/${auth.currentUser.uid}/propuesta1`, this.state.imgToSend1)
+            uploadImage(`images/propuestas/${auth.currentUser.uid}/propuesta2`, this.state.imgToSend2)
+            uploadImage(`images/propuestas/${auth.currentUser.uid}/propuesta3`, this.state.imgToSend3)
+
+            this.setState({status: 'Esperando Respuesta'})
+
+            let newStatus = {
+                'estado': 'Esperando Respuesta'
+            }
+    
+            console.log('images', this.state.imgToSend1, this.state.imgToSend2, this.state.imgToSend3)
+    
+            if(this.state.imgToSend1 != '' && this.state.imgToSend2 != '' && this.state.imgToSend3 != ''){
+                
+                if(this.state.payment == 'Realizado'){
+                    try{
+                        await updateDoc(doc(db, "requests", auth.currentUser.uid), newStatus);
+                        alert('Estado del pedido actualizado');
+                    } 
+                    catch(error){
+                        console.log(error)
+                    }
+                }
+                else{
+                    alert('Por favor asegúrate que el usuario haya realizado el pago');
+                }
+            }
+            else{
+                alert('Por favor subir todas las imagenes');
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
     async componentDidMount(){
@@ -94,6 +200,8 @@ export default class AdminPageRequest extends Component {
                         console.log(docSnap.data())
                         this.setState({business: docSnap.data().nombreEmprendimiento})
                         this.setState({id: docSnap.data().id})
+                        this.setState({status: docSnap.data().estado})
+                        this.setState({payment: docSnap.data().pago})
 
                         this.setState({name: docSnap.data().nombre})
                         this.setState({phone: docSnap.data().telefono})
@@ -134,6 +242,10 @@ export default class AdminPageRequest extends Component {
                         this.getImage('examplePics', 'example1', 'img1');
                         this.getImage('examplePics', 'example2', 'img2');
                         this.getImage('examplePics', 'example3', 'img3');
+
+                        this.getImage('propuestas', 'propuesta1', 'Pimg1');
+                        this.getImage('propuestas', 'propuesta2', 'Pimg2');
+                        this.getImage('propuestas', 'propuesta3', 'Pimg3');
                     }
                     else{
 
@@ -151,6 +263,7 @@ export default class AdminPageRequest extends Component {
             <div>
                 <h1>{this.state.business}</h1>
                 <h4>Guardado con el id {this.state.id}</h4>
+                <h4>Estado: {this.state.status} Pago: {this.state.payment}</h4>
             </div>
             <div>
                 <h3>Nombre del cliente: {this.state.name}</h3>
@@ -195,13 +308,35 @@ export default class AdminPageRequest extends Component {
                         <p>Quiere notificaciones por SMS: {this.state.wantsNotifSMS}</p>
                         <p>Aceptó metodología: {this.state.acceptedMethodology}</p>
                     </div>
-                    <div>
-                        <img src={this.state.img1} alt="" />
-                        <img src={this.state.img2} alt="" />
-                        <img src={this.state.img3} alt="" />
+                    <div className='exampleImages'>
+                        <h2>Ejemplos</h2>
+                        <img src={this.state.img1} className='exampleImages-img' alt="" />
+                        <img src={this.state.img2} className='exampleImages-img' alt="" />
+                        <img src={this.state.img3} className='exampleImages-img' alt="" />
                     </div>
                     <div>
-                        <button>Pago Realizado</button>
+                        <button onClick={this.updatePayment}>Pago Realizado</button>
+                    </div>
+                    <div className = 'proposalImages'>
+                        <h2>Propuestas enviadas</h2>
+                        <img src={this.state.imgToSend1} className='proposalImages-img'></img>
+                        <img src={this.state.imgToSend2} className='proposalImages-img'></img>
+                        <img src={this.state.imgToSend3} className='proposalImages-img'></img>
+                        <div>
+                            <p>Propuesta 1</p>
+                            <input onChange = {(event) => {this.setState({imgToSend1: event.target.files[0]})}} type="file"></input>
+                        </div>
+                        <div>
+                            <p>Propuesta 2</p>
+                            <input onChange = {(event) => {this.setState({imgToSend2: event.target.files[0]})}} type="file"></input>
+                        </div>
+                        <div>
+                            <p>Propuesta 3</p>
+                            <input onChange = {(event) => {this.setState({imgToSend3: event.target.files[0]})}} type="file"></input>
+                        </div>
+                        <div>
+                            <button onClick = {this.uploadImages}>Enviar Propuestas</button>
+                        </div>
                     </div>
             </div>
             <div>

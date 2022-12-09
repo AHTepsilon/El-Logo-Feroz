@@ -40,6 +40,10 @@ $darkGray: #2B2B2B;
                         cursor: pointer;
                         background-color: darken(white, 4%);  
                     }
+
+                    &:focus{
+                        background-color: $hotPink
+                    }
                 }
 
                 &-button-2{
@@ -56,6 +60,10 @@ $darkGray: #2B2B2B;
                     &:hover{
                         cursor: pointer;
                         background-color: darken(white, 4%);  
+                    }
+
+                    &:focus{
+                        background-color: $hotPink
                     }
                 }
 
